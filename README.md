@@ -1,4 +1,10 @@
-# USE CASE DIAGRAMS
+##Table of Contents
+* Use Case Diagrams
+* System Design Diagrams
+* Functional Requirements
+* Non-Functional Requirements
+
+## USE CASE DIAGRAMS
 
 ![UC1](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/84640675/749603d2-03bc-4193-9fe5-df9f00c1c354)
 
@@ -10,3 +16,8 @@
 
 ![UC5](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/84640675/6377baf8-c40f-4c46-9caf-fbdff1d8d3c7)
 
+## System Diagrams
+
+## Functional Requirements
+
+## Non-Functional Requirements
