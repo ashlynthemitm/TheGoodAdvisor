@@ -1,8 +1,8 @@
-## Table of Contents
-* Use Case Diagrams
-* System Design Diagrams
-* [Functional Requirements](#Functional-Requirements)
-* Non-Functional Requirements
+# Table of Contents
+- [USE CASE DIAGRAMS](#use-case-diagrams)
+- [System Diagrams](#system-diagrams)
+- [Functional Requirements](#functional-requirements)
+- [Non-Functional Requirements](#non-functional-requirements)
 
 ## USE CASE DIAGRAMS
 
