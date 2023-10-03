@@ -3,6 +3,7 @@
 - [System Design Diagrams](#system-design-diagrams)
 - [Functional Requirements](#functional-requirements)
 - [Non-Functional Requirements](#non-functional-requirements)
+- [Sprint 1 Presentation](#sprint-1-presentation)
 
 ## Use Case Diagrams
 
@@ -36,3 +37,7 @@
 4. Comprehensive Testing: Thorough testing, including unit testing, integration testing, and user acceptance testing, should be conducted to ensure the chatbot's reliability and functionality.
 5. Response Language and Tone: It should adapt its language and tone to be informative and supportive, catering to the educational context.
 
+
+## Sprint 1 Presentation
+
+https://docs.google.com/presentation/d/1yGV_tC4jtSiPHOuWyx7I7WPqB9XT_VjyeSi4KRjJuy0/edit?usp=sharing
