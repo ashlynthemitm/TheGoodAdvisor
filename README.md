@@ -44,3 +44,11 @@
 https://docs.google.com/presentation/d/1yGV_tC4jtSiPHOuWyx7I7WPqB9XT_VjyeSi4KRjJuy0/edit?usp=sharing
 
 ## Wireframes
+![image](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/106557299/3b249b93-e2e3-472c-a21f-3cca1bb1c722)
+![image](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/106557299/89f2308d-8632-448f-8865-5551e6b0cfa4)
+![image](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/106557299/c18228f2-6e86-4ab3-8fcc-8efb773420a9)
+
+
+
+
+
