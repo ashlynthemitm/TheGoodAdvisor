@@ -2,6 +2,7 @@
 Create the Database System using MySQL 
 Author: Ashlyn Campbell 
 
+Future Steps: Create a table for non-major requirements
 '''
 import mysql.connector
 from dotenv import load_dotenv
