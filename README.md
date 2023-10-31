@@ -1,11 +1,16 @@
 # Table of Contents
+- [Description](#description)
 - [Use Case Diagrams](#use-case-diagrams)
 - [System Design Diagrams](#system-design-diagrams)
 - [Functional Requirements](#functional-requirements)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Sprint 1 Presentation](#sprint-1-presentation)
+- [Sprint 2 Presentation](#sprint-2-presentation)
 - [Wireframes](#wireframes)
 - [Test Cases](#test-cases)
+
+## Description
+The GoodAdvisor is a selection input-based Chatbot created to assist Computer Science students with choosing the correct coursework to take. Picking schedules is hard for anybody, but for CS students it can be difficult to know the best path to take, to effectively prepare for the next one and internships. This way students can map out their four years of college efficiently and intentionally. Students will be prompted with questions to satisfy their user story and have the chance to check off any course they have already taken. 
 
 ## Use Case Diagrams
 
@@ -28,8 +33,8 @@
 1. Course Recommendation: The system must provide course recommendations based on a user's academic progress, major, and career goals.
 2. Generating Schedules: The Good Advisor should generate a comprehensive, semester-by-semester course schedule for users, taking into account course prerequisites.
 3. Natural Language Chatbot: The chatbot must understand and respond to natural language queries related to course selection, prerequisites, and academic planning.
-4. Internship and Career Guidance: The chatbot should provide information and resources related to internships, co-op programs, and career opportunities in the field of computer science.
-5. Semester Load Analysis: The chatbot should help users maintain a balanced semester course load, taking into account credit hours, workload, and the importance of specific courses.
+4. Internship and Career Guidance: The chatbot should provide information and resources related to internships, co-op programs, and career opportunities in computer science.
+5. Semester Load Analysis: The chatbot should help users maintain a balanced semester course load, considering credit hours, workload, and the importance of specific courses.
 
 ## Non-Functional Requirements
     
@@ -41,8 +46,10 @@
 
 
 ## Sprint 1 Presentation
-
 https://docs.google.com/presentation/d/1yGV_tC4jtSiPHOuWyx7I7WPqB9XT_VjyeSi4KRjJuy0/edit?usp=sharing
+
+## Sprint 2 Presentation
+https://docs.google.com/presentation/d/10QOdjy4xlSK6FF20TBklw_5hjoAbyHpOHBGpCyHEKLQ/edit?usp=sharing
 
 ## Wireframes
 ![image](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/106557299/3b249b93-e2e3-472c-a21f-3cca1bb1c722)
