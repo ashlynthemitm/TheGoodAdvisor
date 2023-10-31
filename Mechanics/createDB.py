@@ -16,7 +16,7 @@ def CreateCSCMajorCoursesTable():
         course_type VARCHAR(50),
         course_area VARCHAR(10),
         course_code VARCHAR(10),
-        course_title VARCHAR(50)
+        course_title VARCHAR(50),
         credit_hours INT,
         pre_reqs VARCHAR(255)
     )
