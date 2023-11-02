@@ -65,7 +65,7 @@ def InputPrerequisitesData():
     wb = xlrd.open_workbook(data)
     sheet = wb.sheet_by_index(0)
     rows = sheet.nrows
-    CoursesData = []
+    PrerequisitesData = []
      
     insert_prerequisites_query = """ INSERT INTO 
     Prerequisites(course_code, description) VALUES (%s, %s) """
@@ -75,9 +75,9 @@ def InputPrerequisitesData():
     # update the way how i input the prereqs
     for r in range(2, rows):
         tmp = (sheet.cell_value(r,0), None)
-        CoursesData.append(tmp)
+        PrerequisitesData.append(tmp)
     
-    return CoursesData, insert_prerequisites_query
+    return PrerequisitesData, insert_prerequisites_query
          
 def CreateCSCMajorPrerequisitesTable():
     create_cscmajorprerequisites_query = """
@@ -100,7 +100,6 @@ def InputCSCMajorPrerequisitesData():
     wb = xlrd.open_workbook(data)
     sheet = wb.sheet_by_index(0)
     rows = sheet.nrows
-    CoursesData = []
     
     insert_cscmajorprerequisites_query = """
     INSERT INTO CSCMajorPrerequisites (course_id, prereq_id, course_code, can_choose)
