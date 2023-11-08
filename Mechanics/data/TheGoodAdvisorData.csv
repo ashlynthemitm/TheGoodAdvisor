@@ -1,0 +1,38 @@
+course_type,course_area,course_code,course_title,credit_hours,Pre-requisites
+Core Curriculum,A,MATH 1113,Precalculus,3,MATH 1111
+Core Curriculum,D,MATH 2211,Calculus of One Variable I,4,MATH 1113
+Core Curriculum,D,MATH 2212,Calculus of One Variable II,4,MATH 2211
+Core Curriculum,F,MATH 2215,Multivariate Calculus,4,"MATH 2211,MATH 2212"
+Core Curriculum,F,CSC 1301,Principles of Computer Science I,4,MATH 111 or MATH 1113
+Core Curriculum,F,CSC 1302,Principles of Computer Science II,4,CSC 1301
+Core Curriculum,F,CSC 2510,Theoretical Foundations of Computer Science,3,MATH 1113 or MATH 2211
+Core Curriculum,F,MATH 2420,Discrete Mathematics,3,MATH 1112 or MATH 1113 or MATH 1220
+Core Curriculum,F,Elective Courses (Select 18 hours from the provided list),,,
+Major Requirements,G,MATH 2641,Linear Algebra I,3,MATH 2212
+Major Requirements,G,MATH 3020,Applied Probability and Statistics for Computer Science,3,MATH 2212
+Major Requirements,G,CSC 3350,Software Development-CTW,4,CSC 2720
+Major Requirements,G,CSC 2720,Data Structures,3,"CSC 1302,MATH 2211,CSC 2510 or MATH 2420"
+Major Requirements,G,CSC 3210,Computer Organization and Programming,3,"CSC 1302,CSC 2510 or MATH 2420"
+Major Requirements,G,CSC 3320,System-Level Programming,3,"CSC 1302 or DSCI 1302,CSC 2510 or MATH 2420"
+Major Requirements,G,CSC 4320,Operating Systems,4,CSC 3320
+Major Requirements,G, CSC 4330 ,Programming Language Concepts,4,"CSC 2720,CSC 3210,CSC 3320"
+Major Requirements,G,CSC 4351,Capstone Senior Design I-CTW,4-Jan,CSC 3350
+Major Requirements,G,CSC 4352,Capstone Senior Design II-CTW,4-Jan,CSC 4351
+Major Requirements,G,CSC 4520,Design and Analysis of Algorithms,4,"CSC 2720 or DSCI 2720,MATH 3020 or MATH 3030"
+Major Requirements,G,CSC Elective Courses (Select at least four courses from CSC elective courses at the 3000- or 4000-level),16,4,"any,CSC 4870,CSC 4880,CSC 4980,CSC 4982 "
+Minor and Additional Courses,H,"Twelve hours of additional courses taken at the 2000-4000 level or the following courses: DSCI 1301 , DSCI 1302",,,
+Data Science Certificate Requirements,G,CSC 4780,Fundamentals of Data Science,4,CSC 2720
+Data Science Certificate Choice,G,CSC 4710,Database Systems,4,CSC 2720
+Data Science Certificate Choice,G,CSC 4730,Data Visualization,4,CSC 3320
+Data Science Certificate Choice,G,CSC 4740,Data Mining,4,CSC 2720
+Data Science Certificate Choice,G,CSC 4760,Big Data Programming,4,CSC 2720
+Data Science Certificate Choice,G,CSC 4850,Machine Learning,4,CSC 4520
+Cybersecurity Certificate Requirements,G,CSC 4222,Fundamentals of Cybersecurity,4,"CSC 2720,CSC 3320"
+Cybersecurity Certificate Choice,G,CSC 4220,Computer Networks,4,"CSC 3320,MATH 3020"
+Cybersecurity Certificate Choice,G,CSC 4221,Mobile Computing and Wireless Network Security,4,"CSC 2720,CSC 3320"
+Cybersecurity Certificate Choice,G,CSC 4223,Privacy,4,"CSC 2720,MATH 3020"
+Cybersecurity Certificate Choice,G,CSC 4226,Secure Software Engineering,4,"CSC 2720,CSC 3320"
+Cybersecurity Certificate Choice,G,CSC 4227,Network Security,4,CSC 4220
+Cybersecurity Certificate Choice,G,CSC 4251,Computer Forensics,4,"CSC 2720,CSC 3320"
+Cybersecurity Certificate Choice,G,CSC 4980,Topics in Computer Science,4,With Approval from Department
+Cybersecurity Certificate Choice,G,CSC 4982,Undergraduate Research in Computer Science,4,With Approval from Department
