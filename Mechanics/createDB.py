@@ -32,6 +32,7 @@ def CreatePrerequisiteTable():
         prereq_course_id INT, 
         prereq_name VARCHAR(255),
         choice BOOL,
+        course_code VARCHAR(255),
         FOREIGN KEY (course_id) REFERENCES Course (course_id),
         PRIMARY KEY (course_id, prereq_id)
     );
@@ -45,45 +46,40 @@ def InputTableData():
     sheet = wb.sheet_by_index(0)
     rows = sheet.nrows
     
-    CoursesData, PrerequisitesData = [], []
-    
-    insert_courses_query = """ INSERT INTO 
-    Course(course_id, course_type, course_area, course_code, course_title, credit_hours, description) VALUES (%s, %s, %s, %s, %s, %s, %s); """
+    PrerequisitesData = []
+
     insert_prerequisites_query = """ INSERT INTO 
-    Prerequisite(prereq_id, course_id, prereq_course_id, prereq_name, choice) VALUES (%s, %s, %s, %s, %s); """
+    Prerequisite(prereq_id, course_id, prereq_course_id, prereq_name, choice, course_code) VALUES (%s, %s, %s, %s, %s, %s); """
     
+    course_id = 1
     prereq_id = 1
-    course_id = 0
     prereq_course_id = 1
-    for r in range(2, rows):
-        course_id += 1
+    
+    for r in range(1, rows):
+        if course_id > 33:
+            break
+        course_code = sheet.cell_value(r,2)
+        if (sheet.cell_value(r,5)) == '':
+            continue # no prereq
         
-        if (sheet.cell_value(r,4)) == '':
-            credit_hours = 0
-        else:
-            credit_hours = (sheet.cell_value(r,4))
-            
-        insert_course = (course_id, sheet.cell_value(r,0), sheet.cell_value(r,1), sheet.cell_value(r,2), sheet.cell_value(r,3), credit_hours, None) # descriptions can be updated at a later time
-        
-        CoursesData.append(insert_course)
-        
-        
-        if sheet.cell_value(r,1) == 'H':
-            continue # no prereq statement
-        prereq_arr = sheet.cell_value(r,5).split(',')
+        prereq_arr = (sheet.cell_value(r,5)).split(',')
         for prereq in prereq_arr:
-            if ' or ' in prereq:
+            if 'or' in prereq:
                 choices = prereq.split(' or ')
                 for choice in choices:
-                    insert_prereq = (prereq_id, course_id, prereq_course_id, choice, True) 
+                    tmp = (prereq_id, course_id, prereq_course_id, choice, True, course_code)
+                    PrerequisitesData.append(tmp)
+                    prereq_id += 1
             else:
-                insert_prereq = (prereq_id, course_id, prereq_course_id, prereq, False) 
+                tmp = (prereq_id, course_id, prereq_course_id, prereq, False, course_code)
+                PrerequisitesData.append(tmp)
+                prereq_id += 1
+                prereq_course_id += 1
             
-            PrerequisitesData.append(insert_prereq)
-            prereq_id += 1
-            prereq_course_id += 1
-
-    return CoursesData, PrerequisitesData, insert_courses_query, insert_prerequisites_query
+        prereq_course_id += 1
+        course_id += 1
+    
+    return PrerequisitesData, insert_prerequisites_query
 
 def main():
     load_dotenv() # creation of .env file to store mysql credentials 
@@ -101,21 +97,16 @@ def main():
         # using this cursor to input data
         cursor = TheGoodAdvisor_db.cursor() 
         cursor.execute('use thegoodadvisordb;')
+        
         # create tables
         # cursor.execute(CreateCourseTable())
         # cursor.execute(CreatePrerequisiteTable())
 
         # input data
-        course_data_to_insert, prereq_data_to_insert, course_insert_data_query, prereq_insert_data_query = InputTableData()
-        for record in course_data_to_insert:
-            cursor.execute(course_insert_data_query, record)
+        data_to_insert, insert_data_query = InputTableData()
+        for record in data_to_insert:
+            cursor.execute(insert_data_query, record)
             
-        # commit the changes
-        TheGoodAdvisor_db.commit()
-        
-        for record in prereq_data_to_insert:
-            cursor.execute(prereq_insert_data_query, record)
-       
         # commit the changes
         TheGoodAdvisor_db.commit()
         

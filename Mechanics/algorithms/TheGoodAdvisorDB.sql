@@ -14,18 +14,24 @@ CREATE TABLE Course (
 );
     
 -- generic Prerequisites Table (used for all Prereqs)
+use thegoodadvisordb;
 CREATE TABLE Prerequisite (
 	prereq_id INT,
     course_id INT,
     prereq_course_id INT, -- input this value for OR prereqs
     prereq_name VARCHAR(255),
     choice BOOL,
+    course_code VARCHAR(255),
     FOREIGN KEY (course_id) REFERENCES Course (course_id),
     PRIMARY KEY (course_id, prereq_id)
 );
 
+
 use thegoodadvisordb;
-select * from course;
+
+
+
+
 
 
 
