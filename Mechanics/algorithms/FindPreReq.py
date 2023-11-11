@@ -6,10 +6,17 @@ Author: Ashlyn Campbell
 import mysql.connector
 from dotenv import load_dotenv
 import os 
+from collections import namedtuple
+
+
+
 
 class FindPrerequsites:
-    def __init__(self, requested_courses):
-        self.requested_courses = requested_courses
+    
+    Prerequisite = namedtuple('Prerequisite', ['prereq_name', 'choice', 'prereq_course_id', 'course_code', 'course_title'])
+    
+    def __init__(self):
+        self.temp = None
 
     def __enter__(self):
         try:
@@ -40,31 +47,29 @@ class FindPrerequsites:
             FROM prerequisite p 
             LEFT JOIN course c ON c.course_id = p.course_id
             WHERE p.course_code = '{course}'
-            GROUP BY p.prereq_name, p.choice, p.prereq_course_id, c.course_code, c.course_title;
+            GROUP BY p.prereq_name, p.choice, p.prereq_course_id, c.course_code, c.course_title, c.credit_hours;
             """
         return find_prereq_query
 
-def main(requested_courses):
-    with FindPrerequsites(requested_courses) as dp:
-        dp.cursor.execute('use thegoodadvisordb')
+def main(requested_course):
+    with FindPrerequsites() as fp:
+        fp.cursor.execute('use thegoodadvisordb')
         
         results = []
         
-        for course in requested_courses: # update in the future to find all prerequsites 
-            dp.cursor.execute(dp.findCoursePrerequsite(course))
-            results.extend(dp.cursor.fetchall())
+        # update in the future to find all prerequsites 
+        fp.cursor.execute(fp.findCoursePrerequsite(requested_course))
+        results.extend(fp.cursor.fetchall())
         
-        course_prerequisites = {}
+        course_prerequisites = []
+        
         for row in results:
-            prereq_name, choice, prereq_course_id, course_code, course_title = row
-            if course_code in course_prerequisites:
-                course_prerequisites[course_title].append(prereq_name)
-            else:
-                course_prerequisites[course_title] = [prereq_name]
+            prereq = fp.Prerequisite(*row)
+            course_prerequisites.append(prereq)
 
-        dp.TheGoodAdvisor_db.commit()
+        fp.TheGoodAdvisor_db.commit()
 
         return course_prerequisites
 
 if __name__ == '__main__':
-    print(main(requested_courses=['MATH 1111', 'CSC 1302'])) # printing for now, the dictionary needs to be returned to the calling class
+    print(main('MATH 1113')) # printing for now, the dictionary needs to be returned to the calling class
