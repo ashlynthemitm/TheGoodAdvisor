@@ -1,4 +1,5 @@
 import os
+import streamlit as st
 from dotenv import load_dotenv
 from langchain.llms import HuggingFaceHub
 from langchain.prompts import PromptTemplate
@@ -54,13 +55,13 @@ prompt = PromptTemplate(
 )
 
 def generate_response(prompt, user_message):
-     llm = HuggingFaceHub(repo_id=repo_id, model_kwargs={"temperature":0.6, "max_new_tokens":1048})
+     llm = HuggingFaceHub(repo_id=repo_id, model_kwargs={"temperature":0.6, "max_new_tokens":2048})
      llm_chain = LLMChain(llm=llm, prompt=prompt, verbose=True)
      recommended_courses = retrieve_info(user_message)
-     response = llm_chain.predict(question=user_message["question"], recommended_courses=recommended_courses)
+     response = llm_chain.run(user_message=user_message, recommended_courses=recommended_courses)
      return response
     
-def main():
+def terminal_main():
     while True:
         user_question = input("Enter question (or 'q' to quit):" )
         if user_question == 'q':
@@ -69,7 +70,18 @@ def main():
             user_message = {"question": user_question}
             response = generate_response(prompt, user_message)
             print(response)
+
+def st_main():
+     st.title("The Good Advisor Chatbot Protoapp")
     
+     user_question = st.text_input("Enter your question:")
+    
+     if st.button("Get Recommendation"):
+        if user_question:
+            user_message = {"question": user_question}
+            response = generate_response(prompt, user_message)
+            st.markdown(response)
+
     
 if __name__ == "__main__":
-        main()
+        st_main()
