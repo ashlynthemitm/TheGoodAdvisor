@@ -12,8 +12,7 @@ from collections import namedtuple
 
 
 class FindPrerequsites:
-    
-    Prerequisite = namedtuple('Prerequisite', ['prereq_name', 'choice', 'prereq_course_id', 'course_code', 'course_title'])
+    Prerequisite = namedtuple('Prerequisite', ['prereq_name', 'choice', 'prereq_course_id', 'course_title'])
     
     def __init__(self):
         self.temp = None
@@ -50,26 +49,27 @@ class FindPrerequsites:
             GROUP BY p.prereq_name, p.choice, p.prereq_course_id, c.course_code, c.course_title, c.credit_hours;
             """
         return find_prereq_query
-
-def main(requested_course):
+    
+def main(requested_courses): # The list Prerequisites section will use the Main to get a dictionary of Prerequisites
     with FindPrerequsites() as fp:
         fp.cursor.execute('use thegoodadvisordb')
-        
         results = []
-        
-        # update in the future to find all prerequsites 
-        fp.cursor.execute(fp.findCoursePrerequsite(requested_course))
-        results.extend(fp.cursor.fetchall())
-        
-        course_prerequisites = []
-        
+        for course in requested_courses: # update in the future to find all prerequsites 
+            fp.cursor.execute(fp.findCoursePrerequsite(course))
+            results.extend(fp.cursor.fetchall())
+            course_prerequisites = {}
+            
         for row in results:
-            prereq = fp.Prerequisite(*row)
-            course_prerequisites.append(prereq)
+            prereq_name, choice, prereq_course_id, course_code, course_title = row
+            prereq = fp.Prerequisite(prereq_name, choice, prereq_course_id, course_title)
+            if course_code in course_prerequisites:
+                course_prerequisites[course_code].append(prereq)
+            else:
+                course_prerequisites[course_code] = [prereq]
 
         fp.TheGoodAdvisor_db.commit()
 
         return course_prerequisites
-
+        
 if __name__ == '__main__':
-    print(main('MATH 1113')) # printing for now, the dictionary needs to be returned to the calling class
+    print(main(['CSC 1301'])) # printing for now, the dictionary needs to be returned to the calling class

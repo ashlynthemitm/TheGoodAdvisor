@@ -10,8 +10,8 @@ import FindPreReq
 class DeterminePlan():
     
     def __init__(self, completed_courses):
-        self.priority_stack = ['Core Curriculum', 'Major Requirements', 'Certificate']
-        self.completed_courses = set()
+        self.priority_stack = ['Core Curriculum', 'Major Requirements', 'Data Science Certificate Choice', 'Cybersecurity Certificate Choice']
+        self.completed_courses = completed_courses
         # queues for courses to take order (will include prerequisite shifting)
         self.core_courses = []
         self.major_courses = []
@@ -44,55 +44,170 @@ class DeterminePlan():
 
     def priorityFunc(self, i):
         find_priority_query = f"""
-            SELECT c.course_code, c.course_title, c.credit_hours
+            SELECT c.course_code AS Core_Course, c.credit_hours AS Core_Course_Credit,
+            p.prereq_name AS Prerequisite, pc.credit_hours AS Prereq_Credit
             FROM Course c
-            WHERE c.course_type = '{self.priority_stack[i]}';
-            GROUP BY c.course_code, c.course_title, c.credit_hours;
+            JOIN Prerequisite p ON c.course_code = p.course_code
+            LEFT JOIN Course pc ON p.prereq_name = pc.course_code
+            WHERE c.course_type = '{self.priority_stack[i]}'
+            AND c.course_code NOT IN '{self.completed_courses}'; 
         """
         
         return find_priority_query
+    
+    def FindCourseType(self, i): # begin with core classes
+        
+        # The required class for Certificate programs include requirements
+        find_major_type_query = None
+        if i > 1 or None:
+            if i == 2:
+                # Data Science Certificate Requirements
+                find_major_type_query = f"""
+                SELECT c.course_code
+                FROM Course c
+                WHERE c.course_type = 'Data Science Certificate Requirements';
+            """
+            else:
+                find_major_type_query = f"""
+                    SELECT c.course_code
+                    FROM Course c
+                    WHERE c.course_type = 'Cybersecurity Certificate Requirements';
+                """    
+        if i:
+            find_course_type_query = f"""
+                SELECT c.course_code
+                FROM Course c
+                WHERE c.course_type = '{self.priority_stack[i]}';
+            """
+        
+        return find_course_type_query, find_major_type_query
+    
+    def getPrerequsite(self, requested_course): # get one prerequisite
+        find_prereq_query = f"""
+            SELECT p.prereq_name, p.choice, p.prereq_course_id
+            FROM prerequisite p 
+            LEFT JOIN course c ON c.course_id = p.course_id
+            WHERE p.course_code = '{requested_course}'
+            GROUP BY p.prereq_name, p.choice, p.prereq_course_id;
+            """
+        
+        return find_prereq_query
+        
        
-def main(completed_courses):
+def main(completed_courses, isDataScience, isCyberSecurity):
     with DeterminePlan(completed_courses) as dp:
         dp.cursor.execute('use thegoodadvisordb')
         
-        # Look for Core Requirements first
-        find_priority_query = dp.priorityFunc(0) 
-        dp.cursor.execute(find_priority_query)
+        # Core Requirements 
+        find_core_list_query = dp.FindCourseType(0)[0] 
+        dp.cursor.execute(find_core_list_query)
+        core_course_list = dp.cursor.fetchall() 
         
-        results = dp.cursor.fetchall() # each row contains: course_code, course_title, credit_hours
-        choices = {} # {prereq_course_id: index}
+        # Some Courses are choices (maintain this dictionary to store each)
+        choice_values = {}
         
-        '''
-        Nexts steps: Add a Not in Clause for the core_classes, adjust determination
-        for adding courses in --> courses overlap with prereqs so primarily use for 
-        considering adding something new
-        '''
-        
-        for row in results: 
-            course_code, course_title, credit_hours = row
-        
-            # find the best order to take Core Requirements
-            if course_code not in completed_courses: 
-                prereqs = FindPreReq.main(course_code) # get prereq info
-                
-                for p in prereqs: # adding prereqs before original courses
-                    if p.course_code in completed_courses:
-                        continue # move to the next prerequsite
-                    if p.choice:
-                        if p.prereq_course_id not in choices.keys():
-                            dp.core_courses.append(p.prereq_name)
-                            choices[p.prereq_course_id] = dp.core_courses.index(p.prereq_name)
-                        else:
-                            choiceIndex = choices[p.prereq_course_id]
-                            dp.core_courses[choiceIndex] += ' or ' + p.prereq_name
-                    else:
-                        dp.core_courses.append(p.prereq_name)
-                        
-                dp.core_courses.append(course_code) # add course once prereqs are in
-                
+        for core_course in core_course_list: # add the core courses to the list
+            # check if the course has been taken
+            if core_course in completed_courses:
+                continue
             else:
-                continue # course has been completed move to the next course
+                # check if the prerequsites have been taken
+                find_prerequisite_query = dp.getPrerequsite(core_course)
+                dp.cursor.execute(find_prerequisite_query)
+                prerequisite_list = dp.cursor.fetchall() 
+                # This loop will add all Prerequisites 
+                for prerequisite_info in prerequisite_list:
+                    prereq_code, isChoice, prereq_course_id = prerequisite_info
+                    if isChoice:
+                        # if it's a prerequisite that's a choice it's stored as the id in dp.core_classes
+                        if prereq_course_id in choice_values:
+                            choice_values[prereq_course_id].append(prereq_code)
+                            dp.completed_courses.add(prereq_code) 
+                        else:
+                            choice_values[prereq_course_id] = [prereq_code]
+                            dp.completed_courses.add(prereq_code)
+                        
+                        if prereq_code not in completed_courses:
+                            dp.core_courses.append(prereq_course_id)
+                        
+                    else: # the prerequisite is not a choice and must be taken
+                        dp.core_courses.append(prereq_code)
+                        
+            # Add the core_course after all prerequisites have been entered to maintain the order
+            dp.core_courses.append(core_course)
+            dp.completed_courses.add(core_course)
+        
+        # typically freshmen have only taken pre-core and core requirements, but I may still use the complete_courses set
+        
+        # Major Requirements
+        find_major_list_query = dp.FindCourseType(1)[0]
+        dp.cursor.execute(find_major_list_query)
+        major_course_list = dp.cursor.fetchall() 
+        
+        for major_course in major_course_list:
+            # check if the course has been taken (even in core requirements)
+            if major_course in completed_courses:
+                continue
+            else:
+                # check if the prerequisites have been taken
+                find_prerequisite_query = dp.getPrerequsite(major_course)
+                dp.cursor.execute(find_prerequisite_query)
+                prerequisite_list = dp.cursor.fetchall() 
+                
+                for prerequisite_info in prerequisite_list:
+                    prereq_code, isChoice, prereq_course_id = prerequisite_info
+                    if isChoice:
+                        # if it's a prerequisite that's a choice it's stored as the id in dp.core_classes
+                        if prereq_course_id in choice_values:
+                            choice_values[prereq_course_id].append(prereq_code)
+                            dp.completed_courses.add(prereq_code) 
+                        else:
+                            choice_values[prereq_course_id] = [prereq_code]
+                            dp.completed_courses.add(prereq_code)
+                        
+                        if prereq_code not in completed_courses:
+                            dp.core_courses.append(prereq_course_id)
+                        
+                    else: # the prerequisite is not a choice and must be taken
+                        dp.core_courses.append(prereq_code)
+                        
+            # Add the major_course after all prerequisites have been entered to maintain the order
+            dp.major_courses.append(major_course)
+            dp.completed_courses.add(major_course)
+            
+            
+        # Additional 3000 - 4000 level courses
+        if isDataScience or isCyberSecurity:
+            if isDataScience:
+                find_additional_list_query, required_course = dp.FindCourseType(2)
+            else:
+                find_additional_list_query, required_course = dp.FindCourseType(3)
+            dp.cursor.execute(find_additional_list_query)
+            additional_course_list = dp.cursor.fetchall()
+        
+        if not isDataScience and not isCyberSecurity:
+            dp.certificate = False
+            # The student has no preference, offer 3000-4000 level courses 
+            # Suggest they explore the catalog and choose 4 classes to take
+        else:
+            dp.certificate.append(required_course)
+            for additional_course in additional_course_list:
+                dp.certificate.append(additional_course) # Prerequisites will be factored in later
+
+
+        '''
+        Next Steps: 
+            - After all the course_work lists are populated add to four_year plan based on credit_hours 
+            - query and add until <= 3 classes in CS assigned to each semester
+            
+        1. Create a query to look into each list in parallel, (i,j,k) and find the best course to take 
+        2. Once the four-year plan is created there needs to be generic output to display the plan
+        3. After this is set, the SWE plan can be added to this module and primarily preference 2720 and 
+        other SWE related courses pulled from the website
+        
+        --> Attempt to finish by Friday evening
+        '''
+        
         
         
         dp.TheGoodAdvisor_db.commit()
@@ -100,4 +215,4 @@ def main(completed_courses):
 
 
 if __name__ == '__main__':
-    print(main(completed_courses=['MATH 1111', 'MATH 1113'])) # printing for now, the dictionary needs to be returned to the calling class
+    print(main(completed_courses=('MATH 1111', 'MATH 1113'), isDataScience=False, isCyberSecurity=False)) # printing for now, the dictionary needs to be returned to the calling class
