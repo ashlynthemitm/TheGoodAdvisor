@@ -8,9 +8,6 @@ from dotenv import load_dotenv
 import os 
 from collections import namedtuple
 
-
-
-
 class FindPrerequsites:
     Prerequisite = namedtuple('Prerequisite', ['prereq_name', 'choice', 'prereq_course_id', 'course_title'])
     
