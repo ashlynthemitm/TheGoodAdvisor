@@ -12,11 +12,10 @@ class DeterminePlan():
     def __init__(self, completed_courses):
         self.priority_stack = ['Core Curriculum', 'Major Requirements', 'Data Science Certificate Choice', 'Cybersecurity Certificate Choice']
         self.completed_courses = completed_courses
-        # queues for courses to take order (will include prerequisite shifting)
         self.core_courses = []
         self.major_courses = []
         self.certificate = []
-        self.four_year_plan = [[[], []], [[], []], [[], []], [[], []]]
+        self.four_year_plan = {'First Year': [[],[]], 'Second Year': [[],[]], 'Third Year': [[],[]], 'Fourth Year': [[],[]]}
         self.total_core = 18 # creds required
         
     def __enter__(self):
@@ -92,9 +91,17 @@ class DeterminePlan():
             """
         
         return find_prereq_query
+    
+    def getCreditHours(self, requested_course):
+        find_credits_query = f"""
+            SELECT c.credit_hours
+            FROM Course c
+            WHERE c.course_code = '{requested_course}';
+        """
         
+        return find_credits_query
        
-def main(completed_courses, isDataScience, isCyberSecurity):
+def main(completed_courses, isDataScience, isCyberSecurity, isSWE):
     with DeterminePlan(completed_courses) as dp:
         dp.cursor.execute('use thegoodadvisordb')
         
@@ -205,14 +212,29 @@ def main(completed_courses, isDataScience, isCyberSecurity):
         3. After this is set, the SWE plan can be added to this module and primarily preference 2720 and 
         other SWE related courses pulled from the website
         
-        --> Attempt to finish by Friday evening
         '''
         
+        # Set up four_year_plan dictionary by querying through each list of courses for priority
+        # q = ['First Year', 'Second Year', 'Third Year', 'Fourth Year']
+        # credit_hours = 18 # subtract by credit_hours to fill up
+        # currentSemester = 0 # switch between 0 & 1 to represent the semesters in the year
+        # key = q.pop(0)
+        
+        # Test - print the courses lists
+        
+        
+                    
+        
+        
+        # prioritize 2720 and other notable SWE courses in this four_year_plan query
         
         
         dp.TheGoodAdvisor_db.commit()
         print(dp.core_courses)
-
+        print(dp.major_courses)
+        print(dp.certificate)
+        print('Four Year Plan Complete')
+        return
 
 if __name__ == '__main__':
-    print(main(completed_courses=('MATH 1111', 'MATH 1113'), isDataScience=False, isCyberSecurity=False)) # printing for now, the dictionary needs to be returned to the calling class
+    print(main(completed_courses=('MATH 1111', 'MATH 1113'), isDataScience=False, isCyberSecurity=False, isSWE=False)) # printing for now, the dictionary needs to be returned to the calling class
