@@ -29,12 +29,12 @@ class ChatOutput:
         
     def findPrerequisite(self, requested_courses):
         # returns a dictionary of prereqs
-        course_prerequsites = FindPreReq.main(requested_courses=requested_courses)
+        course_prerequisites = FindPreReq.main(requested_courses=requested_courses)
         
         self.output += f'The Prerequsites for the courses you have requested are,\n'
         
-        for course in course_prerequsites.keys():
-            prereqs = course_prerequsites[course].join(', ')
+        for course in course_prerequisites.keys():
+            prereqs = course_prerequisites[course].join(', ')
             self.output += '[{course}] requires {prereqs}'
             
         return self.output
