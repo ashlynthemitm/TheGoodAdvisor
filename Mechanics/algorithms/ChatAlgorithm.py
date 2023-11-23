@@ -1,5 +1,5 @@
 '''
-Full Algorithm for Chatbot Mechanics
+Full Algorithm for Chatbot Mechanics includes a FourYearPlan Class to handle coursework separation and a full Algorithm Class to compute the different Chatbot capabilities such as Finding Prerequisites and Generating an efficient FourYearPlan
 
 Author: Ashlyn Campbell 
 '''
@@ -16,34 +16,50 @@ class FourYearPlan:
         self.current_year = 'First Year'
         self.current_semester = 0
         self.current_hours = 0
+        self.current_courses = set()
+        self.taken_courses = set()
         
     def addCourse(self, course, credit_hours):
-        # this adds courses to the four_year_plan
         if self.current_hours + credit_hours > 12:
-            self.current_hours = 0
-            if self.current_semester == 0:
-                self.current_semester = 1
-            else:
-                self.current_semester = 0
-                self.nextYear()
-                    
+            self.nextSemester()
         self.current_hours += credit_hours
         self.four_year_plan[self.current_year][self.current_semester].append(course)
                 
-    def nextYear(self):
-        match(self.current_year):
-            case 'First Year':
-                self.current_year = 'Second Year'
-            case 'Second Year':
-                self.current_year = 'Third Year'
-            case 'Third Year':
-                self.current_year = 'Fourth Year'
+    def nextSemester(self):
+        if (self.current_semester + 1 )> 1:
+            self.current_semester = 0
+            match(self.current_year):
+                case 'First Year':
+                    self.current_year = 'Second Year'
+                case 'Second Year':
+                    self.current_year = 'Third Year'
+                case 'Third Year':
+                    self.current_year = 'Fourth Year'
+                case _:
+                    # Fourth Year --> additional classes past four years
+                    print('Classes were not complete in time')
+                    print(self.current_year) # Error Handling
+                    print(self.current_semester)
+                    self.current_year = 'Summer Semester'
+        else:
+            self.current_semester = 1
+        
+        self.taken_courses.update(self.current_courses) # When the semester changes classes are views as taken
+
+    def removeEquivalent(self, course, courses_list):
+        match (course):
+            case 'MATH 2420':
+                self.current_courses.add('CSC 2510')
+                if 'CSC 2510' in courses_list:
+                    courses_list.remove('CSC 2510')
+            case 'CSC 2510':
+                self.current_courses.add('MATH 2420')
+                if 'MATH 2420' in courses_list:
+                    courses_list.remove('MATH 2420')
             case _:
-                # Fourth Year --> additional classes past four years
-                print('Classes were not complete in time')
-                print(self.current_year)
-                print(self.current_semester)
-                self.current_year = 'Summer Semester'
+                if course in courses_list:
+                    courses_list.remove(course)
+        return courses_list
                 
 class ChatAlgorithm():
     def __init__(self, completed_courses):
@@ -51,7 +67,6 @@ class ChatAlgorithm():
         self.priority_course_types = ['Core Curriculum', 'Major Requirements', ('Data Science Certificate Requirements', 'Data Science Certificate Choice'), ('Cybersecurity Certificate Requirements', 'Cybersecurity Certificate Choice')]
         self.swe_priority = set({'CSC 1302','MATH 2211','CSC 2510 or MATH 2420'})
         self.four_year_plan = FourYearPlan()
-        self.inPlan = set() # This will be used to not readd any values
         self.course_credits = {}
         
         
@@ -119,43 +134,76 @@ class ChatAlgorithm():
             """
         self.cursor.execute(find_courses_query)
         course_results = self.cursor.fetchall()
-        
+    
         for row in course_results:
             courses_list.append(row[0])
             
         course_prerequisites = self.FindPrerequisites(courses_list, default=False) 
        
-        for course in courses_list:
-            match = re.fullmatch(r'\b[A-Z]{3,4} [0-9]{4}\b', course)
-            if course in self.inPlan or (not match):
-                continue 
-            for prereq in course_prerequisites[course]:
-                if ' or ' in prereq:
-                    prereq_choices = prereq.split(' or ') 
-                    if any(value in self.inPlan for value in prereq_choices):
-                        continue
+        while courses_list: # remove courses from list to indicate they have been taken (everything must be added)
+            if len(courses_list) == 1:
+                break
+            for index, course in enumerate(courses_list):
+                # redo this entire alg 
+                '''
+                PLan: 
+                for loop
+                    1. look at each course --> 
+                    Ex. Curr = MATH 1113, Taken = MATH 1111
+                    if course in taken --> continue 
+                    elif course in curr (means all prereqs are met)
                     else:
-                        prereq = prereq_choices[0]
-                             
-                match (prereq, course):
-                    case 'MATH 2420':
-                        self.inPlan.append('CSC 2510')
-                    case 'CSC 2510':
-                        self.inPlan.append('MATH 2420')
-                if prereq in self.inPlan:
+                        if prereqs in taken: 
+                            put course in curr 
+                        elif prereqs not in taken or curr:
+                            put prereqs in curr 
+                        elif prereqs in curr:
+                            course needs to be in nextSemester(), index ++ continue to find classes for curr 
+                # at the end of for loop, call nextSemester function
+                Plan.NextSemester()
+                '''
+                match = re.fullmatch(r'\b[A-Z]{3,4} [0-9]{4}\b', course)
+                if course in ((self.four_year_plan.taken_courses) or (self.four_year_plan.current_courses) or (not match)):
                     continue
-                else: 
-                    self.inPlan.add(prereq)
-                    courses_list.append(prereq)
-                    self.four_year_plan.addCourse(prereq, self.course_credits.get(prereq, 4))
-            self.inPlan.add(course)
-            courses_list.append(course)
-            self.four_year_plan.addCourse(course, self.course_credits.get(course, 4))
-            if i > 1:
-                course_count += 1
-            if course_count == 4:
-                return 
-            
+                else: # --> May need a Remove call for prereqs that are also required courses to not be added several times 
+                    # Check if Prereqs are in taken and curr in this section (at least one for or, or only)
+                    missingPrerequisite = False
+                    for prereq in course_prerequisites[course]:
+                        if ' or ' in prereq:
+                            prereq_choices = prereq.split(' or ') 
+                            if any(value in (self.four_year_plan.taken_courses) for value in prereq_choices):
+                                continue
+                            elif not any(value in (self.four_year_plan.taken_courses or self.four_year_plan.current_courses) for value in prereq_choices): 
+                                self.four_year_plan.addCourse(prereq_choices[0], self.course_credits.get(prereq_choices[0], 4))
+                                self.four_year_plan.current_courses.add(prereq_choices[0])
+                                missingPrerequisite = True
+                            elif prereq_choices[0] in self.four_year_plan.current_courses:
+                                missingPrerequisite = True
+                            # no else for now, else would indicate the prereq is already in the current
+                            courses_list = self.four_year_plan.removeEquivalent(prereq_choices[0], courses_list)
+                        else: # no or statement, check if in taken
+                            if prereq in self.four_year_plan.taken_courses:
+                                continue
+                            elif prereq not in (self.four_year_plan.taken_courses or self.four_year_plan.current_courses):
+                                self.four_year_plan.addCourse(prereq, self.course_credits.get(prereq, 4))
+                                self.four_year_plan.current_courses.add(prereq)
+                                missingPrerequisite = True
+                            elif prereq in self.four_year_plan.current_courses:
+                                missingPrerequisite = True
+                                
+                            courses_list = self.four_year_plan.removeEquivalent(prereq, courses_list)
+                            
+                                
+                    if not missingPrerequisite:
+                        # All prerequisites are in taken_courses set so course can be added
+                        courses_list = self.four_year_plan.removeEquivalent(course, courses_list)
+                        self.four_year_plan.addCourse(course, self.course_credits.get(course, 4))
+                        self.four_year_plan.current_courses.add(course)
+                        if i > 1:
+                            course_count += 1
+                        if course_count == 4:
+                            return 
+                        
         # by the end of this, the FourYearPlan should be populated
     
     def CreateFourYearPlan(self, isDataScience, isCYBER, isSWE):
@@ -177,11 +225,10 @@ class ChatAlgorithm():
             self.PopulateCoursework(i=3)
         else:
             # no particular preference for certificate program
-            self.certificate_courses = 'Pick any CSC 3000/4000 level courses, Add suggestions to this output'   
             for i in range(4):
-                self.four_year_plan.addCourse(course='ANY CSC 3000/4000', credit_hours=4)
-
-                
+                self.four_year_plan.addCourse(course='ANY CSC 3000-4000', credit_hours=4)
+                 
+        
 def main(completed_courses, find_prerequisites=False, create_four_year_plan=False, isDataScience=False, isCYBER=False, isSWE=False):
     with ChatAlgorithm(completed_courses) as chat:
         chat.cursor.execute('use thegoodadvisordb')
@@ -192,12 +239,12 @@ def main(completed_courses, find_prerequisites=False, create_four_year_plan=Fals
             
         # If Generate Four Year Plan is True
         for course in completed_courses:
-            chat.inPlan.add(course)
+            chat.four_year_plan.taken_courses.add(course)
         if create_four_year_plan:
             chat.CreateFourYearPlan(isDataScience, isCYBER, isSWE)
-        
-        print('inPlan: ', chat.inPlan)
+
         print(chat.four_year_plan.four_year_plan)
+        
         chat.TheGoodAdvisor_db.commit()
 
 if __name__ == '__main__':
@@ -207,8 +254,8 @@ if __name__ == '__main__':
     
 '''
 Debugging Steps: 
-1- Fix 2420 - 2510 error
-2 - Add 2720 emphasis 
-3 - Fix ChatOutput
+ - Make sure the semesters don't have any prereqs in the semester (current task) --> continue debugging and finish up this weekend
+ - Add 2720 emphasis 
+ - Fix ChatOutput
 (Clean up and be ready to explain/present)
 '''
