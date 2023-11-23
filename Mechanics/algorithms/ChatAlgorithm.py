@@ -26,6 +26,7 @@ class FourYearPlan:
         self.four_year_plan[self.current_year][self.current_semester].append(course)
                 
     def nextSemester(self):
+        self.current_hours = 0
         if (self.current_semester + 1 )> 1:
             self.current_semester = 0
             match(self.current_year):
@@ -163,6 +164,7 @@ class ChatAlgorithm():
                 Plan.NextSemester()
                 '''
                 match = re.fullmatch(r'\b[A-Z]{3,4} [0-9]{4}\b', course)
+                
                 if course in ((self.four_year_plan.taken_courses) or (self.four_year_plan.current_courses) or (not match)):
                     continue
                 else: # --> May need a Remove call for prereqs that are also required courses to not be added several times 
@@ -254,7 +256,7 @@ if __name__ == '__main__':
     
 '''
 Debugging Steps: 
- - Make sure the semesters don't have any prereqs in the semester (current task) --> continue debugging and finish up this weekend
+ - It works now ! Does something really weird with match though, figure that out later!
  - Add 2720 emphasis 
  - Fix ChatOutput
 (Clean up and be ready to explain/present)
