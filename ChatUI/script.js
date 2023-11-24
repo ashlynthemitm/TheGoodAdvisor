@@ -6,6 +6,12 @@ document.getElementById("submitButton").addEventListener("click", function () {
     var incomingFreshmanOptions = document.getElementById("incoming-freshman-options");
     var existingCreditsOptions = document.getElementById("existing-credits-options");
 
+     // Determine the request type based on user selection
+     var findPrerequisite = false;
+     var findFourYearPlan = false;
+     var findSWECoursework = false;
+     var completedCourses = [];
+
     if (selectedStudentType) {
         var selectedValue = selectedStudentType.value;
 
@@ -33,4 +39,6 @@ document.getElementById("submitButton").addEventListener("click", function () {
     } else {
         outputMessageField.textContent = "Select a student type first.";
     }
+
+   
 });
