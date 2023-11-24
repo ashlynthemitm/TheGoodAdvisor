@@ -5,9 +5,9 @@
     box-sizing: border-box;
 }
 
-/* Apply a grayish background color to the entire page */
+
 .page-background {
-    background-color: #dcdcdc; /* Grayish color */
+    background-color: #dcdcdc; 
 }
 
 /* Header */

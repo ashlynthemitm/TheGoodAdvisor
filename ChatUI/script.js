@@ -4,6 +4,7 @@ document.getElementById("submitButton").addEventListener("click", function () {
     var outputMessageField = document.getElementById("outputMessageField");
     var rightTabHeading = document.querySelector('.right-tab h2');
     var incomingFreshmanOptions = document.getElementById("incoming-freshman-options");
+    var existingCreditsOptions = document.getElementById("existing-credits-options");
 
     if (selectedStudentType) {
         var selectedValue = selectedStudentType.value;
@@ -15,11 +16,15 @@ document.getElementById("submitButton").addEventListener("click", function () {
             var studentTypeContainer = document.querySelector('.radio-group');
             studentTypeContainer.innerHTML = '';
             incomingFreshmanOptions.style.display = "block";
+            existingCreditsOptions.style.display = "none";
         } else if (selectedValue === "existing-credits") {
             inputMessageField.value = "Existing Credits";
-            rightTabHeading.textContent = "What Courses Have You Taken?";
-            outputMessageField.textContent = "Welcome to Georgia State University! I am The Good Advisor! Please provide more details about your existing credits.";
+            rightTabHeading.textContent = "Select Courses Taken";
+            outputMessageField.textContent = "Welcome to Georgia State University! I am The Good Advisor! Please select the courses you have taken.";
+            var studentTypeContainer = document.querySelector('.radio-group');
+            studentTypeContainer.innerHTML = '';
             incomingFreshmanOptions.style.display = "none";
+            existingCreditsOptions.style.display = "block";
         }
 
         // Show the input and output fields
