@@ -3,8 +3,7 @@ This module is used for generic outputs in the ChatBot by using the generate fou
 as SWE, and prerequisites to be outputted.      
 Author: Ashlyn Campbell 
 '''
-import FourYearPlan
-import FindPreReq 
+import ChatAlgorithm
 
 class ChatOutput:
     # The constructor takes in the requests the user as bool parameters and call the algorithms to place into the functions
@@ -27,9 +26,9 @@ class ChatOutput:
         I have attached below the requested information! \n \n
         """
         
-    def findPrerequisite(self, requested_courses):
+    def findPrerequisite(self, completed_courses, find_prerequisites=True, create_four_year_plan=False, isDataScience=False, isCYBER=False, isSWE=False):
         # returns a dictionary of prereqs
-        course_prerequisites = FindPreReq.main(requested_courses=requested_courses)
+        course_prerequisites = ChatAlgorithm.main(completed_courses=completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True)
         
         self.output += f'The Prerequsites for the courses you have requested are,\n'
         
@@ -39,8 +38,9 @@ class ChatOutput:
             
         return self.output
     
-    def findFourYearPlan(self, completed_courses, isDataScience=False, isCyberSecurity=False, isSWE=False):
-        four_year_plan = FourYearPlan.main(completed_courses=completed_courses, isDataScience=isDataScience, isCyberSecurity=isCyberSecurity, isSWE=isSWE)
+    def GenerateFourYearPlan(self, completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True):
+        
+        four_year_plan = ChatAlgorithm.main(completed_courses=completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True)
         # returns a 2d array representing the four-year plan
         
         self.output += f'The Four-Year Plan for your anticipated graduation is,'
@@ -55,3 +55,8 @@ class ChatOutput:
         self.output += '\n I hope this four-year plan suits your interests!'
         
         return self.output
+    
+# no credits or existing credits, four_year_plan or prereqs or swe, 
+# params for output
+    
+    

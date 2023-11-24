@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from Mechanics.algorithms import ChatAlgorithm
+# from Mechanics.algorithms import ChatAlgorithm
 from Mechanics.algorithms import ChatOutput
 
 app = Flask(__name__)
