@@ -1,6 +1,2 @@
-langchain==0.0.334
-python-dotenv==0.21.0
-huggingface_hub==0.8.2
-sentence-transformers==2.2.2
-faiss-cpu==1.7.4
-streamlit==1.28.1
+Flask==2.2.2
+request=2.31.0
