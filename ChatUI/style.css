@@ -1,0 +1,148 @@
+/* Reset some default styles for margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply a grayish background color to the entire page */
+.page-background {
+    background-color: #dcdcdc; /* Grayish color */
+}
+
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    background-color: #dcdcdc; /* Use the same background color as the body */
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo image */
+.logo img {
+    width: 100px;
+    height: 100px;
+}
+
+/* Header heading */
+.header h1 {
+    font-size: 33px;
+    font-weight: 600;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0;
+}
+
+/* Main content area */
+.main-content {
+    padding: 1rem;
+    background-color: #dcdcdc; /* Use the same background color as the body */
+    margin-left: 20px; /* Add a left margin of 20px */
+}
+
+/* Input Message Field */
+input[type="text"] {
+    width: calc(50% - 200px);
+    padding: 0.5rem;
+    border: 1px solid #00a8c5;
+    border-radius: 0.5rem;
+    font-family: "Proxima Nova", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000000;
+    position: absolute;
+    bottom: 45rem;
+    left: 35em;
+    background-color: #dcdcdc; /* Use the same background color as the body */
+}
+
+/* Status message */
+.status-message {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Proxima Nova", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #00a8c5;
+    background-color: #dcdcdc; /* Use the same background color as the body */
+}
+
+/* Output Message Field */
+.output-message {
+    width: calc(50% - 200px); /* Match the same width as the input message field */
+    padding: 0.5rem;
+    border: 1px solid #00a8c5;
+    border-radius: 0.5rem;
+    font-family: "Proxima Nova", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #000000;
+    position: absolute;
+    bottom: 38rem;
+    left: 13em; /* Adjust the left position to match the input message field */
+    background-color: #dcdcdc; /* Use the same background color as the body */
+}
+
+/* Right tab */
+.right-tab {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 280px;
+    height: 100%;
+    padding: 1rem;
+    background-color: #dcdcdc; /* Use the same background color as the body */
+    border-left: 1px solid #cccccc;
+    z-index: 2;
+}
+
+/* Adjust the alignment of circular radio buttons */
+.radio-group {
+    margin-top: 1rem;
+}
+
+.radio-group label {
+    display: block;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    margin: 0;
+    transform: scale(1.5);
+}
+
+/* Send button */
+button[type="button"] {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #00a8c5;
+    border-radius: 0.5rem;
+    background-color: #00a8c5;
+    color: #ffffff;
+    font-family: "Proxima Nova", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: #0092a2; /* Change color on hover for interactivity */
+}
+
+/* Add styles for plain-link class to make the link appear as plain text */
+.plain-link {
+    text-decoration: none;
+    color: inherit;
+    cursor: default;
+}
