@@ -53,10 +53,12 @@ class FourYearPlan:
                 self.current_courses.add('CSC 2510')
                 if 'CSC 2510' in courses_list:
                     courses_list.remove('CSC 2510')
+                    courses_list.remove('MATH 2420')
             case 'CSC 2510':
                 self.current_courses.add('MATH 2420')
                 if 'MATH 2420' in courses_list:
                     courses_list.remove('MATH 2420')
+                    courses_list.remove('CSC 2510')
             case _:
                 if course in courses_list:
                     courses_list.remove(course)
@@ -140,35 +142,15 @@ class ChatAlgorithm():
             courses_list.append(row[0])
             
         course_prerequisites = self.FindPrerequisites(courses_list, default=False) 
-       
-        while courses_list: # remove courses from list to indicate they have been taken (everything must be added)
-            if len(courses_list) == 1:
-                break
+        # add another layer to tailor towards the list looking at the entirety
+        while courses_list: # remove courses from list 
             for index, course in enumerate(courses_list):
-                # redo this entire alg 
-                '''
-                PLan: 
-                for loop
-                    1. look at each course --> 
-                    Ex. Curr = MATH 1113, Taken = MATH 1111
-                    if course in taken --> continue 
-                    elif course in curr (means all prereqs are met)
-                    else:
-                        if prereqs in taken: 
-                            put course in curr 
-                        elif prereqs not in taken or curr:
-                            put prereqs in curr 
-                        elif prereqs in curr:
-                            course needs to be in nextSemester(), index ++ continue to find classes for curr 
-                # at the end of for loop, call nextSemester function
-                Plan.NextSemester()
-                '''
                 match = re.fullmatch(r'\b[A-Z]{3,4} [0-9]{4}\b', course)
-                
-                if course in ((self.four_year_plan.taken_courses) or (self.four_year_plan.current_courses) or (not match)):
+                if not match:
+                    courses_list = self.four_year_plan.removeEquivalent(course, courses_list)
+                if course in ((self.four_year_plan.taken_courses) or (self.four_year_plan.current_courses)):
                     continue
-                else: # --> May need a Remove call for prereqs that are also required courses to not be added several times 
-                    # Check if Prereqs are in taken and curr in this section (at least one for or, or only)
+                else: 
                     missingPrerequisite = False
                     for prereq in course_prerequisites[course]:
                         if ' or ' in prereq:

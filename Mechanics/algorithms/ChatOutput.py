@@ -3,8 +3,7 @@ This module is used for generic outputs in the ChatBot by using the generate fou
 as SWE, and prerequisites to be outputted.      
 Author: Ashlyn Campbell 
 '''
-import FourYearPlan
-import FindPreReq 
+import Flask 
 
 class ChatOutput:
     # The constructor takes in the requests the user as bool parameters and call the algorithms to place into the functions
