@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
-import ChatOutput
-import sys
-sys.path.append('Mechanics/Chatbot/app.py')
+from flask_cors import CORS
+from ChatOutput import ChatOutput
 
 app = Flask(__name__)
 CORS(app)
