@@ -3,7 +3,6 @@ Full Algorithm for Chatbot Mechanics includes a FourYearPlan Class to handle cou
 
 Author: Ashlyn Campbell 
 '''
-from collections import namedtuple
 from dotenv import load_dotenv
 import mysql.connector
 import os 
@@ -23,8 +22,8 @@ class FourYearPlan:
         if self.current_hours + credit_hours > 12:
             self.nextSemester()
         self.current_hours += credit_hours
-        self.four_year_plan[self.current_year][self.current_semester].append(course)
-                
+        self.four_year_plan[self.current_year][self.current_semester].append(course)   
+            
     def nextSemester(self):
         self.current_hours = 0
         if (self.current_semester + 1 )> 1:
@@ -119,7 +118,7 @@ class ChatAlgorithm():
                 course_prerequisites[course_code].append(row[0])
                 
         return course_prerequisites
-    
+        
     def PopulateCoursework(self,i):
         courses_list = []
         course_count = 0
@@ -139,7 +138,8 @@ class ChatAlgorithm():
         course_results = self.cursor.fetchall()
     
         for row in course_results:
-            courses_list.append(row[0])
+            if row[0] != 'MATH 2215': # this course isnt required for this initial demo
+                courses_list.append(row[0])
             
         course_prerequisites = self.FindPrerequisites(courses_list, default=False) 
         # add another layer to tailor towards the list looking at the entirety
@@ -157,14 +157,15 @@ class ChatAlgorithm():
                             prereq_choices = prereq.split(' or ') 
                             if any(value in (self.four_year_plan.taken_courses) for value in prereq_choices):
                                 continue
-                            elif not any(value in (self.four_year_plan.taken_courses or self.four_year_plan.current_courses) for value in prereq_choices): 
+                            elif not any(value in (self.four_year_plan.taken_courses and self.four_year_plan.current_courses) for value in prereq_choices): 
                                 self.four_year_plan.addCourse(prereq_choices[0], self.course_credits.get(prereq_choices[0], 4))
                                 self.four_year_plan.current_courses.add(prereq_choices[0])
                                 missingPrerequisite = True
                             elif prereq_choices[0] in self.four_year_plan.current_courses:
                                 missingPrerequisite = True
-                            # no else for now, else would indicate the prereq is already in the current
+                            
                             courses_list = self.four_year_plan.removeEquivalent(prereq_choices[0], courses_list)
+                            
                         else: # no or statement, check if in taken
                             if prereq in self.four_year_plan.taken_courses:
                                 continue
@@ -176,7 +177,6 @@ class ChatAlgorithm():
                                 missingPrerequisite = True
                                 
                             courses_list = self.four_year_plan.removeEquivalent(prereq, courses_list)
-                            
                                 
                     if not missingPrerequisite:
                         # All prerequisites are in taken_courses set so course can be added
@@ -200,7 +200,7 @@ class ChatAlgorithm():
         for row in credits_results:
             course_code, credit_hours = row
             self.course_credits[course_code] = credit_hours
-    
+        # Populate Coursework in Four Year Plan
         self.PopulateCoursework(i=0)
         self.PopulateCoursework(i=1)
         if isDataScience:
@@ -230,15 +230,12 @@ def main(completed_courses, find_prerequisites=False, create_four_year_plan=Fals
         
         chat.TheGoodAdvisor_db.commit()
 
+# Used for testing purposes
 # if __name__ == '__main__':
 #     completed_courses = set()
 #     completed_courses.add('MATH 1111')
-#     main(completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True)
+#     #completed_courses.add('MATH 1113')
+#     #completed_courses.add('MATH 2211')
+#     print(main(completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True))
     
-'''
-Debugging Steps: 
- - It works now ! Does something really weird with match though, figure that out later!
- - Add 2720 emphasis 
- - Fix ChatOutput
-(Clean up and be ready to explain/present)
-'''
+

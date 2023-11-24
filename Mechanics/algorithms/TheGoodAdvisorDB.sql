@@ -1,3 +1,4 @@
+-- Author: Ashlyn Campbell
 /* The Good Advisor Database */
 -- Courses Table (Required & Not Required all stored here)
 CREATE DATABASE thegoodadvisordb;
