@@ -219,22 +219,21 @@ def main(completed_courses, find_prerequisites=False, create_four_year_plan=Fals
         
         # The User can either Find Prerequisites or Generate a Four Year Plan
         if find_prerequisites:
-            print(chat.FindPrerequisites(find_prerequisites))
+            return chat.FindPrerequisites(find_prerequisites)
             
         # If Generate Four Year Plan is True
         for course in completed_courses:
             chat.four_year_plan.taken_courses.add(course)
         if create_four_year_plan:
             chat.CreateFourYearPlan(isDataScience, isCYBER, isSWE)
-
-        print(chat.four_year_plan.four_year_plan)
+            return chat.four_year_plan.four_year_plan
         
         chat.TheGoodAdvisor_db.commit()
 
-if __name__ == '__main__':
-    completed_courses = set()
-    completed_courses.add('MATH 1111')
-    main(completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True)
+# if __name__ == '__main__':
+#     completed_courses = set()
+#     completed_courses.add('MATH 1111')
+#     main(completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True)
     
 '''
 Debugging Steps: 
