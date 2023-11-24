@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Good Advisor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-background">
+<div class="header">
+    <h1>
+        <a href="index.html" class="plain-link">The<br>Good<br>Advisor</a>
+    </h1>
+</div>
+
+<div class="logo">
+    <img src="gsu.png" alt="The Good Advisor">
+</div>
+
+<div class="main-content">
+    <div class="status-message" id="statusMessageField">
+        Select an input on the right tab.
+    </div>
+</div>
+
+<div class="right-tab">
+    <h2>Student Type</h2>
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="student-type" value="incoming-freshman"> Incoming Freshman
+        </label>
+        <label>
+            <input type="radio" name="student-type" value="existing-credits"> Existing Credits
+        </label>
+    </div>
+
+    <!-- Options for Incoming Freshman -->
+    <div id="incoming-freshman-options" style="display: none;">
+        <div>
+            <label>
+                <input type="radio" name="student-option" value="four-year-plan"> Four Year Plan
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="student-option" value="prerequisites"> Pre-requisites for a Course
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="student-option" value="software-engineering"> Software Engineering Coursework
+            </label>
+        </div>
+    </div>
+
+    <button type="button" id="submitButton">Send</button>
+</div>
+
+<!-- Input Message Field -->
+<input type="text" placeholder="Input Message Field" id="inputMessageField" style="display: none;">
+
+<!-- Output Message Field -->
+<div class="output-message" id="outputMessageField" style="display: none;">
+    <!-- Output message content goes here -->
+</div>
+
+<!-- Include the JavaScript file -->
+<script src="script.js"></script>
+</body>
+</html>
