@@ -27,5 +27,6 @@ def process_request():
     else:
         return jsonify({"error": "No valid selection made"}), 400
 
+
 if __name__=='__main__':
     app.run(debug=True)
