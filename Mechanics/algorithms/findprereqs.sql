@@ -1,3 +1,4 @@
+-- Author: Ashlyn Campbell
 -- Using this SQL file to find prerequisites 
 -- Example: User prompts for prerequisites for CSC 1302 
 /*

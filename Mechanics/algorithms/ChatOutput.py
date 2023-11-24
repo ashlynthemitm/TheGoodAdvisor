@@ -56,7 +56,5 @@ class ChatOutput:
         
         return self.output
     
-# no credits or existing credits, four_year_plan or prereqs or swe, 
-# params for output
     
     
