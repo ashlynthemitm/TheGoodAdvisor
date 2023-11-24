@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
+
 import ChatOutput
-import sys
-sys.path.append('Mechanics/Chatbot/app.py')
 
 app = Flask(__name__)
 
