@@ -4,7 +4,9 @@ from flask_cors import CORS
 
 
 # Set the path to the templates
-app = Flask(__name__, static_folder='ChatUI/static', template_folder='ChatUI/templates')
+app = Flask(__name__, 
+            static_folder='../ChatUI/static', 
+            template_folder='../ChatUI/templates')
 CORS(app)
 
 @app.route('/')
