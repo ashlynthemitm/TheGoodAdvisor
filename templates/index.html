@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Good Advisor</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+</head>
+<body class="page-background">
+<div class="header">
+    <h1>
+        <a href="index.html" class="plain-link">The<br>Good<br>Advisor</a>
+    </h1>
+</div>
+
+<div class="logo">
+    <img src="{{ url_for('static', filename='images/gsu.png') }}" alt="GSU logo">
+</div>
+
+<div class="main-content">
+    <div class="status-message" id="statusMessageField">
+        Select an input on the right tab.
+    </div>
+</div>
+
+<div class="right-tab">
+    <h2>Student Type</h2>
+    <div class="radio-group">
+        <label>
+            <input type="radio" name="student-type" value="incoming-freshman"> Incoming Freshman
+        </label>
+        <label>
+            <input type="radio" name="student-type" value="existing-credits"> Existing Credits
+        </label>
+    </div>
+
+    <!-- Options for Incoming Freshman -->
+    <div id="incoming-freshman-options" style="display: none;">
+        <div>
+            <label>
+                <input type="radio" name="student-option" value="four-year-plan"> Four Year Plan
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="student-option" value="prerequisites1"> Pre-requisites for a Course
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="radio" name="student-option" value="software-engineering1"> Software Engineering Coursework
+            </label>
+        </div>
+    </div>
+
+    <!-- Options for Existing Credits -->
+    <div id="existing-credits-options" style="display: none;">
+        <div class="checkbox-group">
+            <label>
+                <input type="checkbox" name="course-taken" value="MATH 1113"> Precalculus
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="MATH 2211"> Calculus of One Variable I
+            </label>
+            <!-- Add more checkboxes as needed -->
+            <label>
+                <input type="checkbox" name="course-taken" value="MATH 2212"> Calculus of One Variable II
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="MATH 2215"> Multivariate Calculus
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 1301"> Principles of Computer Science I
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 1302"> Principles of Computer Science II
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 2510"> Theoretical Foundations of Computer Science
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="MATH 2420"> Discrete Mathematics
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="MATH 2641"> Linear Algebra I
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 2720"> Data Structures
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="MATH 3020"> Applied Probability and Statistics for Computer Science
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 3210"> Computer Organization and Programming
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 3320"> System-Level Programming
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 3350"> Software Development-CTW
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 4320"> Operating Systems
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value=" CSC 4330"> Programming Language Concepts
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 4351"> Capstone Senior Design I-CTW
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 4352"> Capstone Senior Design II-CTW
+            </label>
+            <label>
+                <input type="checkbox" name="course-taken" value="CSC 4520"> Design and Analysis of Algorithms
+            </label>
+        </div>
+    </div>
+
+    <button type="button" id="submitButton">Send</button>
+</div>
+
+<!-- Input Message Field -->
+<input type="text" placeholder="Input Message Field" id="inputMessageField" style="display: none;">
+
+<!-- Output Message Field -->
+<div class="output-message" id="outputMessageField" style="display: none;">
+    <!-- Output message content goes here -->
+</div>
+
+<!-- Include the JavaScript file -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

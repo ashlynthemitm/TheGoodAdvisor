@@ -49,6 +49,7 @@ document.getElementById("submitButton").addEventListener("click", function () {
 
         }
 
+        console.log("Prerequisite:", findPrerequisite, "Four Year Plan:", findFourYearPlan, "SWE Coursework:", findSWECoursework);
         // Prepare data for AJAX request
         var requestData = {
             findPrerequisite: findPrerequisite,
@@ -56,6 +57,8 @@ document.getElementById("submitButton").addEventListener("click", function () {
             findSWECoursework: findSWECoursework,
             completed_courses: completedCourses
         };
+
+        
         // AJAX request to Flask server
         fetch('http://localhost:5000/process-request', {
             method: 'POST',

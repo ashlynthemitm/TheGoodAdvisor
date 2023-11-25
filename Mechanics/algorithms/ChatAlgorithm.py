@@ -230,7 +230,7 @@ def main(completed_courses, find_prerequisites=False, create_four_year_plan=Fals
         
         chat.TheGoodAdvisor_db.commit()
 
-# Used for testing purposes
+# # Used for testing purposes
 # if __name__ == '__main__':
 #     completed_courses = set()
 #     completed_courses.add('MATH 1111')
