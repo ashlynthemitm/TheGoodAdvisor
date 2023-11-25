@@ -222,9 +222,9 @@ def main(completed_courses, find_prerequisites=False, create_four_year_plan=Fals
             return chat.FindPrerequisites(find_prerequisites)
             
         # If Generate Four Year Plan is True
-        for course in completed_courses:
-            chat.four_year_plan.taken_courses.add(course)
         if create_four_year_plan:
+            for course in completed_courses:
+                chat.four_year_plan.taken_courses.add(course)
             chat.CreateFourYearPlan(isDataScience, isCYBER, isSWE)
             return chat.four_year_plan.four_year_plan
         
