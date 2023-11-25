@@ -1,5 +1,8 @@
 import os
+import sys
 from flask import Flask, render_template, request, jsonify
+from Mechanics.algorithms.ChatOutput import ChatOutput
+
 from flask_cors import CORS
 
 
@@ -14,4 +17,5 @@ def index():
     return render_template('index.html')
 
 if __name__=='__main__':
+    print(sys.path)
     app.run(debug=True)
