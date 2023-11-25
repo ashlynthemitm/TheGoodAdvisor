@@ -5,9 +5,9 @@
     box-sizing: border-box;
 }
 
-
+/* Apply a grayish background color to the entire page */
 .page-background {
-    background-color: #dcdcdc; 
+    background-color: #dcdcdc; /* Grayish color */
 }
 
 /* Header */
@@ -145,4 +145,24 @@ button[type="button"]:hover {
     text-decoration: none;
     color: inherit;
     cursor: default;
+}
+.checkbox-group {
+    columns: 4;
+    -webkit-columns: 4;
+    -moz-columns: 4;
+}
+
+.checkbox-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.pre-req-options-container {
+    columns: 2; /* Number of columns */
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.pre-req-options-container label {
+    display: block;
+    margin-bottom: 8px;
 }
