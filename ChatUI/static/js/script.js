@@ -131,4 +131,26 @@ document.getElementById("submitButton").addEventListener("click", function() {
             }
         }
     }
+
+    // sendRequestToServer('/generate-four-year-plan', requestData);
+    // sendRequestToServer('/find-prerequisite', requestData);
+   function sendReuestToServer(url, requestData) {
+        fetch(url, {
+            method:'POST',
+            headers: {
+                'Content-type':'application/json',
+            },
+            body: JSON.stringify(requestData),
+        })
+        .then(response => response.json())
+        .then(data=>
+            { document.getElementById("outputMessageField").textContent = JSON.stringify(data);
+    })
+    .catch(error=>{
+        console.error('Error:', error)
+        document.getElementById("outputMessageField").textContent = 'An error occurred';
+    })
+   }
+
 })
+
