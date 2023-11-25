@@ -20,41 +20,41 @@ class ChatOutput:
             print('Error no selection has been made to find output!!!')
             return
         
-        self.output = f"""
-        I am happy to help you with your course needs! I see that you have selected to {requestType} to assist
-        with your college journey! \n
-        I have attached below the requested information! \n \n
-        """
+        self.output = f""" I am happy to help you with your course needs! I see that you have selected to {requestType} to assist with your college journey! \n I have attached below the requested information!\n\n"""
         
-    def findPrerequisite(self, completed_courses, find_prerequisites=True, create_four_year_plan=False, isDataScience=False, isCYBER=False, isSWE=False):
+    def findPrerequisite(self, completed_courses=[], find_prerequisites=[True], create_four_year_plan=False, isDataScience=False, isCYBER=False, isSWE=False):
         # returns a dictionary of prereqs
-        course_prerequisites = ChatAlgorithm.main(completed_courses=completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True)
+        course_prerequisites = ChatAlgorithm.main(completed_courses=completed_courses, find_prerequisites=find_prerequisites, create_four_year_plan=False, isDataScience=False, isCYBER=False, isSWE=False)
         
-        self.output += f'The Prerequsites for the courses you have requested are,\n'
+        self.output += f'The Prerequisites for the courses you have requested are,\n'
         
         for course in course_prerequisites.keys():
-            prereqs = course_prerequisites[course].join(', ')
-            self.output += '[{course}] requires {prereqs}'
+            if course_prerequisites[course]:
+                prereqs = ', '.join(map(str, course_prerequisites[course]))
+                self.output += f'{course} requires, {prereqs}\n'
+            else:
+                self.output += f'{course} does not require any prerequisites\n'
             
         return self.output
     
-    def GenerateFourYearPlan(self, completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True):
+    def GenerateFourYearPlan(self, completed_courses=[], find_prerequisites=[], create_four_year_plan=True, isDataScience=False, isCYBER=False, isSWE=False):
         
-        four_year_plan = ChatAlgorithm.main(completed_courses=completed_courses, find_prerequisites=False, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True)
+        four_year_plan = ChatAlgorithm.main(completed_courses=completed_courses, find_prerequisites=find_prerequisites, create_four_year_plan=True, isDataScience=True, isCYBER=False, isSWE=True)
         # returns a 2d array representing the four-year plan
         
-        self.output += f'The Four-Year Plan for your anticipated graduation is,'
+        self.output += f'The Four-Year Plan for your anticipated graduation is\n'
         for year in four_year_plan.keys():
-            first_semester = four_year_plan[year][0].join(', ')
-            second_semester = four_year_plan[year][1].join(', ')
-            output += f"""
-            {year} - \n 
-            Semester 1: {first_semester} \n
-            Semester 2: {second_semester} \n
-            """
+            first_semester = ', '.join(map(str, four_year_plan[year][0]))
+            second_semester = ', '.join(map(str, four_year_plan[year][1]))
+            self.output += f"""{year} - \n Semester 1: {first_semester} \n Semester 2: {second_semester} \n"""
         self.output += '\n I hope this four-year plan suits your interests!'
         
         return self.output
     
+# def testOutput():
+    # chat = ChatOutput(findPrerequisite=True)
+    # print(chat.findPrerequisite(completed_courses=[], find_prerequisites=['MATH 1111', 'MATH 1113', 'CSC 2510', 'MATH 2215']))
     
-    
+    # chat = ChatOutput(findFourYearPlan=True)
+    # print(chat.GenerateFourYearPlan(completed_courses=['MATH 1111']))
+# testOutput()
