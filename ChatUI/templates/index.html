@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>The Good Advisor</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}"
 </head>
 <body class="page-background">
 <div class="header">
@@ -12,7 +12,7 @@
 </div>
 
 <div class="logo">
-    <img src="{{ url_for('static', filename='images/gsu.png') }}" alt="GSU logo">
+    <img src="gsu.png" alt="The Good Advisor">
 </div>
 
 <div class="main-content">
@@ -25,10 +25,10 @@
     <h2>Student Type</h2>
     <div class="radio-group">
         <label>
-            <input type="radio" name="student-type" value="incoming-freshman"> Incoming Freshman
+            <input type="radio" name="student-type" value="incoming-freshman"> Incoming Freshman With 0 Credit Hours
         </label>
         <label>
-            <input type="radio" name="student-type" value="existing-credits"> Existing Credits
+            <input type="radio" name="student-type" value="existing-credits"> I have AP/Dual Enrollment Credits
         </label>
     </div>
 
@@ -37,12 +37,12 @@
         <div id="freshman-Container">
             <div>
             <label>
-                <input type="radio" name="student-option" value="four-year-plan"> Four Year Plan
+                <input type="radio" name="student-option" value="four-year-plan"> A Four Year Plan
             </label>
             </div>
             <div>
             <label>
-                <input type="radio" name="student-option" value="prerequisites1"> Pre-requisites for a Course
+                <input type="radio" name="student-option" value="prerequisites1"> Prerequisites for a Course
             </label>
             </div>
 
@@ -53,21 +53,33 @@
             </label>
             </div>
 
-            <div>
-                <label>
-                    <input type="radio" name="student-option" value="data-science-certificate"> Data Science Certificate
-                </label>
-            </div>
-
-            <div>
-                <label>
-                    <input type="radio" name="student-option" value="cybersecurity-certificate"> CyberSecurity Certificate
-                </label>
-            </div>
-
         </div>
 
     </div>
+	
+				<div id="freshplan-select-your-plan" style="display: none;">
+					<div id="freshman-Container">
+						<div>
+							<label>
+								<input type="radio" name="student-optionPlan4Year" value="data-science-certificate"> Data Science Certificate
+							</label>
+						</div>
+
+						<div>
+							<label>
+								<input type="radio" name="student-optionPlan4Year" value="cybersecurity-certificate"> CyberSecurity Certificate
+							</label>
+						</div>
+						<div>
+							<label>
+								<input type="radio" name="student-optionPlan4Year" value="none"> None
+							</label>
+						</div>
+					</div>
+				</div>
+	
+	
+	
 
     <!-- Options for Existing Credits -->
     <div id="existing-credits-options" style="display: none;">
@@ -188,8 +200,11 @@
                         <input type="radio" name="existing-option" value="Remaining Plan"> Remaining Plan
                     </label>
                 </div>
-
-                <div>
+            </div>
+        </div>
+		<div id="ExistingCredits2-RemainingPlan" style="display: none;">
+            <div id="existing-credits-container">
+				<div>
                     <label>
                         <input type="radio" name="existing-option" value="datascience-cert"> Data Science Certificate
                     </label>
@@ -200,8 +215,13 @@
                         <input type="radio" name="existing-option" value="cyber-security-cert"> CyberSecurity Certificate
                     </label>
                 </div>
-            </div>
-        </div>
+				<div>
+                    <label>
+                        <input type="radio" name="existing-option" value="none"> None
+                    </label>
+                </div>
+			</div>
+		</div>
 
         <div id="preReqForCourse-options" style="display: none;">
             <div id="pre-req-options-container">
@@ -322,4 +342,3 @@
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
-
