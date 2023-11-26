@@ -1,9 +1,16 @@
 document.getElementById("submitButton").addEventListener("click", function() {
+	
     var selectedStudentType = document.querySelector('input[name="student-type"]:checked');
+	
+	var studentPlan4Year = document.querySelector('input[name="student-optionPlan4Year"]:checked');
+	
     var inputMessageField = document.getElementById("inputMessageField");
     var outputMessageField = document.getElementById("outputMessageField");
     var rightTabHeading = document.querySelector('.right-tab h2');
     var incomingFreshmanOptions = document.getElementById("incoming-freshman-options");
+	
+	var fresherSelectYourPlan = document.getElementById("freshplan-select-your-plan");
+	
     var existingCreditsOptions = document.getElementById("existing-credits-options");
     var existingOptions = document.getElementById("existing-credits-container");
     var fourYearPlanOption = document.querySelector('input[name="student-option"][value="four-year-plan"]');
@@ -13,6 +20,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
     var cyberSecurityCertificateOption = document.querySelector('input[name="student-option"][value="cybersecurity-certificate"]');
     var existingDataScienceCertificateOption = document.querySelector('input[name="existing-option"][value="datascience-cert"]');
     var existingCyberSecurityCertificateOption = document.querySelector('input[name="existing-option"][value="cyber-security-cert"]');
+	var existingNoneOption = document.querySelector('input[name="existing-option"][value="none"]');
     outputMessageField.textContent = ""; // Clear existing output message
 
 
@@ -37,16 +45,36 @@ document.getElementById("submitButton").addEventListener("click", function() {
                 var sendButton1 = document.getElementById('submitButton');
                 sendButton1.addEventListener('click', function (){
                     if (fourYearPlanOption && fourYearPlanOption.checked) {
-
-                        outputMessageField.textContent = "Here is your four year plan";
-                        var rightTab = document.querySelector('.right-tab');
-                        rightTab.style.display = "none";
-                        var statusMessage = document.getElementById('statusMessageField');
-                        statusMessage.textContent = '';
+						inputMessageField.value = "Incoming Freshman";
+						outputMessageField.textContent = "Welcome to Georgia State University! We are excited to have you join our incoming freshman class.";
+						rightTabHeading.textContent = "Select your plan";
+						
+						//alert(fourYearPlanOption.value);
+						incomingFreshmanOptions.style.display = "none";
+						existingCreditsOptions.style.display = "none";
+						fresherSelectYourPlan.style.display = "block";
+						//alert("inner");
+						
+						
+						var sendButton1 = document.getElementById('submitButton');
+						sendButton1.addEventListener('click', function (){
+							
+								var valuePlan =  document.querySelector('input[name=student-optionPlan4Year]:checked').value;
+								if(valuePlan === "data-science-certificate"){
+									outputMessageField.textContent = "Here is your 4 year plan, with Data Science";
+								}
+								else if(valuePlan === "cybersecurity-certificate"){
+									outputMessageField.textContent = "Here is your 4 year plan, with CyberSecurity";
+								}
+								else if(valuePlan === "none"){
+									outputMessageField.textContent = "Here is your 4 year plan, You have selected none";
+								}
+							
+						})   
 
                     }
                     else if (softwareEngineeringCourseworkOption && softwareEngineeringCourseworkOption.checked) {
-                        outputMessageField.textContent = "Here is your Software Engineering Coursework.";
+                        outputMessageField.textContent = "Here is your Software Engineering Coursework. Take CSC as soon as possible.";
                         var rightTab = document.querySelector('.right-tab');
                         rightTab.style.display = "none";
                         var statusMessage = document.getElementById('statusMessageField');
@@ -75,6 +103,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
                         var preReqSelected = document.querySelector('input[name="course-taken"]:checked');
 
                         if (preReqSelected) {
+							
                             var selectedCourse = preReqSelected.value;
 
                             // Display pre-requisites for the selected course in the output message field
@@ -136,6 +165,8 @@ document.getElementById("submitButton").addEventListener("click", function() {
                         existingCreditsOptions.style.display = "none";
 
                         // Assuming there's a container for the new options
+						var remainingPlan = document.getElementById("ExistingCredits2-RemainingPlan");
+						
                         var existingCredits2Options = document.getElementById("ExistingCredits2-options");
                         var rightTab = document.querySelector('.right-tab');
                         rightTab.appendChild(existingCredits2Options); // Append the new options to the right tab
@@ -147,9 +178,21 @@ document.getElementById("submitButton").addEventListener("click", function() {
                             outputMessageField.textContent = "Here is the track to prepare for a SWE Internship.";
                             // Additional logic if needed for the SWE Internship track
                         } else if (remainingPlanOption && remainingPlanOption.checked) {
+							
+							rightTabHeading.textContent = "Please select a Concentration";
+							existingCredits2Options.style.display = "none";
+							
+							
+							
+							var rightTabRemain = document.querySelector('.right-tab');
+							rightTabRemain.appendChild(remainingPlan);
+							remainingPlan.style.display = "block";
+							
                             outputMessageField.textContent = "Here are the list of courses needed in order for you to graduate.";
                             // Additional logic for the remaining plan
-                        } else if (prereqoption && prereqoption.checked) {                        inputMessageField.value = "Pre-requisite for Course";
+                        } else if (prereqoption && prereqoption.checked) {         
+							//alert("error");               
+							inputMessageField.value = "Pre-requisite for Course";
                             outputMessageField.textContent = "Select and send the course you would like a pre-requisite for on the right tab.";
                             rightTabHeading.textContent = "Select The Course";
                             incomingFreshmanOptions.style.display = "none";
@@ -170,16 +213,24 @@ document.getElementById("submitButton").addEventListener("click", function() {
                             var preReqSelected = document.querySelector('input[name="course-taken"]:checked');
 
                             if (preReqSelected) {
+								
+								
                                 var selectedCourse = preReqSelected.value;
-
+	
                                 // Display pre-requisites for the selected course in the output message field
                                 inputMessageField.value = "Pre-requisite for Course";
                                 outputMessageField.textContent = `Here are the pre-requisites for ${selectedCourse}: [List your pre-requisites here]`;
-
+								existingOptions.style.display = "none";
                                 // Hide the right tab
                                 var rightTab = document.querySelector('.right-tab');
-                                rightTab.style.display = "none";
-
+                                rightTab.style.display = "block";
+								
+								var sendButton2 = document.getElementById('submitButton');
+								sendButton2.addEventListener('click', function(){
+									//alert("entered in field");
+									rightTab.style.display = "none";
+									outputMessageField.textContent = `Here are the pre-requisites for all the course(Here you can display your desired message)`;
+								})
                                 // Clear any existing status or messages
                                 var statusMessage = document.getElementById('statusMessageField');
                                 statusMessage.textContent = '';
@@ -200,9 +251,13 @@ document.getElementById("submitButton").addEventListener("click", function() {
                             var statusMessage = document.getElementById('statusMessageField');
                             statusMessage.textContent = '';
                         }
-                        else {
+                        else if(existingNoneOption && existingNoneOption.checked){
                             // Handle the case if no checkboxes are selected
-                            outputMessageField.textContent = "Please select at least one course taken.";
+                            outputMessageField.textContent = "You did not select course";
+                            var rightTab = document.querySelector('.right-tab');
+                            rightTab.style.display = "none";
+                            var statusMessage = document.getElementById('statusMessageField');
+                            statusMessage.textContent = '';
                         }
                     }
                 })
@@ -218,10 +273,9 @@ document.getElementById("submitButton").addEventListener("click", function() {
 
 
     }
-
     // sendRequestToServer('/generate-four-year-plan', requestData);
     // sendRequestToServer('/find-prerequisite', requestData);
-   function sendReuestToServer(url, requestData) {
+    function sendReuestToServer(url, requestData) {
         fetch(url, {
             method:'POST',
             headers: {
@@ -229,15 +283,15 @@ document.getElementById("submitButton").addEventListener("click", function() {
             },
             body: JSON.stringify(requestData),
         })
-        .then(response => response.json())
-        .then(data=>
+            .then(response => response.json())
+            .then(data=>
             { document.getElementById("outputMessageField").textContent = JSON.stringify(data);
-    })
-    .catch(error=>{
-        console.error('Error:', error)
-        document.getElementById("outputMessageField").textContent = 'An error occurred';
-    })
-   }
+            })
+            .catch(error=>{
+                console.error('Error:', error)
+                document.getElementById("outputMessageField").textContent = 'An error occurred';
+            })
+    }
 
-})
+});
 
