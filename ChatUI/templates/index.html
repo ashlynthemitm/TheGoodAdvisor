@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>The Good Advisor</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}"
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="page-background">
 <div class="header">
@@ -36,50 +36,50 @@
     <div id="incoming-freshman-options" style="display: none;">
         <div id="freshman-Container">
             <div>
-            <label>
-                <input type="radio" name="student-option" value="four-year-plan"> A Four Year Plan
-            </label>
+                <label>
+                    <input type="radio" name="student-option" value="four-year-plan"> A Four Year Plan
+                </label>
             </div>
             <div>
-            <label>
-                <input type="radio" name="student-option" value="prerequisites1"> Prerequisites for a Course
-            </label>
+                <label>
+                    <input type="radio" name="student-option" value="prerequisites1"> Prerequisites for a Course
+                </label>
             </div>
 
 
             <div>
-            <label>
-                <input type="radio" name="student-option" value="software-engineering1"> Software Engineering Coursework
-            </label>
+                <label>
+                    <input type="radio" name="student-option" value="software-engineering1"> Software Engineering Coursework
+                </label>
             </div>
 
         </div>
 
     </div>
-	
-				<div id="freshplan-select-your-plan" style="display: none;">
-					<div id="freshman-Container">
-						<div>
-							<label>
-								<input type="radio" name="student-optionPlan4Year" value="data-science-certificate"> Data Science Certificate
-							</label>
-						</div>
 
-						<div>
-							<label>
-								<input type="radio" name="student-optionPlan4Year" value="cybersecurity-certificate"> CyberSecurity Certificate
-							</label>
-						</div>
-						<div>
-							<label>
-								<input type="radio" name="student-optionPlan4Year" value="none"> None
-							</label>
-						</div>
-					</div>
-				</div>
-	
-	
-	
+    <div id="freshplan-select-your-plan" style="display: none;">
+        <div id="freshman-Container">
+            <div>
+                <label>
+                    <input type="radio" name="student-optionPlan4Year" value="data-science-certificate"> Data Science Certificate
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="radio" name="student-optionPlan4Year" value="cybersecurity-certificate"> CyberSecurity Certificate
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input type="radio" name="student-optionPlan4Year" value="none"> None
+                </label>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <!-- Options for Existing Credits -->
     <div id="existing-credits-options" style="display: none;">
@@ -186,14 +186,14 @@
         <div id="ExistingCredits2-options" style="display: none;">
             <div id="existing-credits-container">
                 <div>
-                <label>
-                    <input type="radio" name="existing-option" value="Pre-Req For Course"> Pre-Req For Course
-                </label>
+                    <label>
+                        <input type="radio" name="existing-option" value="Pre-Req For Course"> Pre-Req For Course
+                    </label>
                 </div>
                 <div>
-                <label>
-                <input type="radio" name="existing-option" value="Software Engineering Internship"> Software Engineering Internship
-                </label>
+                    <label>
+                        <input type="radio" name="existing-option" value="Software Engineering Internship"> Software Engineering Internship
+                    </label>
                 </div>
                 <div>
                     <label>
@@ -202,9 +202,9 @@
                 </div>
             </div>
         </div>
-		<div id="ExistingCredits2-RemainingPlan" style="display: none;">
+        <div id="ExistingCredits2-RemainingPlan" style="display: none;">
             <div id="existing-credits-container">
-				<div>
+                <div>
                     <label>
                         <input type="radio" name="existing-option" value="datascience-cert"> Data Science Certificate
                     </label>
@@ -215,13 +215,13 @@
                         <input type="radio" name="existing-option" value="cyber-security-cert"> CyberSecurity Certificate
                     </label>
                 </div>
-				<div>
+                <div>
                     <label>
                         <input type="radio" name="existing-option" value="none"> None
                     </label>
                 </div>
-			</div>
-		</div>
+            </div>
+        </div>
 
         <div id="preReqForCourse-options" style="display: none;">
             <div id="pre-req-options-container">
@@ -339,6 +339,6 @@
 </div>
 
 <!-- Include the JavaScript file -->
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="script.js"></script>
 </body>
 </html>
