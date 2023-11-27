@@ -334,114 +334,6 @@ document.getElementById("submitButton").addEventListener("click", function() {
                         outputMessageField.textContent = "Please select a course for pre-requisites.";
                     }
                 })
-
-                // // Checkboxes logic when at least one checkbox is selected and "Send" is clicked
-                // var sendButton2 = document.getElementById('submitButton');
-                // sendButton2.addEventListener('click', function () {var checkboxes = document.querySelectorAll('input[name="course-taken"]:checked');
-                //     if (checkboxes.length > 0) {
-                //         inputMessageField.value = "I need prerequisites for courses!";
-                //         outputMessageField.textContent = "Select an option on the right tab";
-                //         rightTabHeading.textContent = "Select An Option";
-                //         incomingFreshmanOptions.style.display = "none";
-                //         existingCreditsOptions.style.display = "none";
-
-                //         // Assuming there's a container for the new options
-				// 		var remainingPlan = document.getElementById("ExistingCredits2-RemainingPlan");
-						
-                //         var existingCredits2Options = document.getElementById("ExistingCredits2-options");
-                //         var rightTab = document.querySelector('.right-tab');
-                //         rightTab.appendChild(existingCredits2Options); // Append the new options to the right tab
-                //         existingCredits2Options.style.display = "block";
-                //         var softwareEngineeringInternshipOption = document.querySelector('input[name="existing-option"][value="Software Engineering Internship"]');
-                //         var remainingPlanOption = document.querySelector('input[name="existing-option"][value="Remaining Plan"]');
-                //         var prereqoption = document.querySelector('input[name="existing-option"][value="Pre-Req For Course"]');
-                //         if (softwareEngineeringInternshipOption && softwareEngineeringInternshipOption.checked) {
-                //             outputMessageField.textContent = "Here is the track to prepare for a SWE Internship.";
-                //             // Additional logic if needed for the SWE Internship track
-                //         } else if (remainingPlanOption && remainingPlanOption.checked) {
-							
-				// 			rightTabHeading.textContent = "Please select a Concentration";
-				// 			existingCredits2Options.style.display = "none";
-							
-							
-							
-				// 			var rightTabRemain = document.querySelector('.right-tab');
-				// 			rightTabRemain.appendChild(remainingPlan);
-				// 			remainingPlan.style.display = "block";
-							
-                //             outputMessageField.textContent = "Here are the list of courses needed in order for you to graduate.";
-                //             // Additional logic for the remaining plan
-                //         } else if (prereqoption && prereqoption.checked) {         
-				// 			//alert("error");               
-				// 			inputMessageField.value = "I need prerequisites for courses!";
-                //             outputMessageField.textContent = "Select and send the course you would like a pre-requisite for on the right tab.";
-                //             rightTabHeading.textContent = "Select The Courses";
-                //             incomingFreshmanOptions.style.display = "none";
-                //             existingCreditsOptions.style.display = "none";
-
-                //             var preReqForCourseOptionsContainer = document.getElementById("pre-req-options-container");
-                //             var sendButton = document.getElementById('submitButton');
-                //             var rightTab = document.querySelector('.right-tab');
-                //             rightTab.appendChild(preReqForCourseOptionsContainer); // Append pre-requisite radio buttons to the right tab
-                //             preReqForCourseOptionsContainer.style.display = "block";
-
-                //             sendButton.style.position = 'absolute';
-                //             sendButton.style.bottom = '1rem'; // Set desired bottom position
-                //             sendButton.style.left = '50%'; // Set left position to the center
-                //             sendButton.style.transform = 'translateX(-50%)';
-                //             sendButton.style.width = ''; // Reset width to default (if overridden)
-                //             sendButton.style.height = '';
-                //             var preReqSelected = document.querySelector('input[name="course-taken"]:checked');
-
-                //             if (preReqSelected) {
-								
-								
-                //                 var selectedCourse = preReqSelected.value;
-	
-                //                 // Display pre-requisites for the selected course in the output message field
-                //                 inputMessageField.value = "I need prerequisites for courses!";
-                //                 outputMessageField.textContent = `Here are the pre-requisites for ${selectedCourse}: [List your pre-requisites here]`;
-				// 				existingOptions.style.display = "none";
-                //                 // Hide the right tab
-                //                 var rightTab = document.querySelector('.right-tab');
-                //                 rightTab.style.display = "block";
-								
-				// 				var sendButton2 = document.getElementById('submitButton');
-				// 				sendButton2.addEventListener('click', function(){
-				// 					//alert("entered in field");
-				// 					rightTab.style.display = "none";
-				// 					outputMessageField.textContent = `Here are the pre-requisites for all the course(Here you can display your desired message)`;
-				// 				})
-                //                 // Clear any existing status or messages
-                //                 var statusMessage = document.getElementById('statusMessageField');
-                //                 statusMessage.textContent = '';
-                //             }
-
-                //         }
-                //         else if (existingDataScienceCertificateOption && existingDataScienceCertificateOption.checked) {
-                //             outputMessageField.textContent = "Here is your Data Science Certificate Coursework.";
-                //             var rightTab = document.querySelector('.right-tab');
-                //             rightTab.style.display = "none";
-                //             var statusMessage = document.getElementById('statusMessageField');
-                //             statusMessage.textContent = '';
-                //         }
-                //         else if (existingCyberSecurityCertificateOption && existingCyberSecurityCertificateOption.checked) {
-                //             outputMessageField.textContent = "Here is your CyberSecurity Certificate Coursework.";
-                //             var rightTab = document.querySelector('.right-tab');
-                //             rightTab.style.display = "none";
-                //             var statusMessage = document.getElementById('statusMessageField');
-                //             statusMessage.textContent = '';
-                //         }
-                //         else if(existingNoneOption && existingNoneOption.checked){
-                //             // Handle the case if no checkboxes are selected
-                //             outputMessageField.textContent = "You did not select course";
-                //             var rightTab = document.querySelector('.right-tab');
-                //             rightTab.style.display = "none";
-                //             var statusMessage = document.getElementById('statusMessageField');
-                //             statusMessage.textContent = '';
-                //         }
-                //     }
-                // })
             }
         }
 
@@ -454,41 +346,45 @@ document.getElementById("submitButton").addEventListener("click", function() {
 
 function callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE) {
     // Make an AJAX request to the Flask server
-    $.ajax({
+     // AJAX call to Flask server
+     $.ajax({
         type: 'POST',
         url: '/process-request',
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify({
-            completed_courses: completed_courses, 
-            find_prerequisites: find_prerequisites, 
-            create_four_year_plan: create_four_year_plan, 
-            isDataScience: isDataScience, 
-            isCYBER: isCYBER, 
-            isSWE: isSWE
+            completed_courses: completedCourses,
+            find_prerequisites: findPrerequisites,
+            create_four_year_plan: createFourYearPlan,
+            isDataScience: isDataScience,
+            isCYBER: isCyberSecurity,
+            isSWE: isSoftwareEngineering
         }),
-        success: function (response) {
-            // Handle the response from the server
-            if (response.fourYearPlan != 'Empty') {
-                console.log(response.fourYearPlan);
-                var formattedText = response.fourYearPlan.replace(/\n/g, '<br>');
-                outputMessageField.innerHTML = formattedText;
-            }
-            else if (response.prerequisite != 'Empty') {
-                console.log(response.prerequisite);
-                var formattedText = response.prerequisite.replace(/\n/g, '<br>');
-                outputMessageField.innerHTML = formattedText;
-            } else {
-                // If it's not a string, handle accordingly
-                console.error('Invalid response format for fourYearPlan:', fourYearPlan);
-                outputMessageField.textContent = 'Error: Invalid response format for fourYearPlan';
-            }
+        success: handleResponse,
+        error: handleError
+    });
+}
 
-        },
-        error: function (error) {
-            console.error(error);
-            outputMessageField.textContent = "Thank you for using the Good Advisor!";
-        }
-});
+function handleResponse(response){
+     // Handle the response from the server
+     if (response.fourYearPlan != 'Empty') {
+        console.log(response.fourYearPlan);
+        var formattedText = response.fourYearPlan.replace(/\n/g, '<br>');
+        outputMessageField.innerHTML = formattedText;
+    }
+    else if (response.prerequisite != 'Empty') {
+        console.log(response.prerequisite);
+        var formattedText = response.prerequisite.replace(/\n/g, '<br>');
+        outputMessageField.innerHTML = formattedText;
+    } else {
+        // If it's not a string, handle accordingly
+        console.error('Invalid response format for fourYearPlan:', fourYearPlan);
+        outputMessageField.textContent = 'Error: Invalid response format for fourYearPlan';
+    }
+
+}
+function handleError(error){
+        console.error(error);
+        outputMessageField.textContent = "Thank you for using the Good Advisor!";
 }
 
 });
