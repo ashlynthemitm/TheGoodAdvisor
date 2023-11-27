@@ -27,15 +27,15 @@
     </div>
 
     <div class="right-tab">
-      <h2>Student Type</h2>
+      <h2>What type of student are you?</h2>
       <div class="radio-group">
         <label>
           <input type="radio" name="student-type" value="incoming-freshman" />
-          Incoming Freshman With 0 Credit Hours
+          I'm an incoming freshman with 0 credit hours!
         </label>
         <label>
           <input type="radio" name="student-type" value="existing-credits" /> I
-          have AP/Dual Enrollment Credits
+          I have AP/dual enrollment credits!
         </label>
       </div>
 
@@ -49,7 +49,7 @@
                 name="student-option"
                 value="four-year-plan"
               />
-              A Four Year Plan
+              I would like help creating a four-year plan!
             </label>
           </div>
           <div>
@@ -59,7 +59,7 @@
                 name="student-option"
                 value="prerequisites1"
               />
-              Prerequisites for a Course
+              I need prerequisites for courses!
             </label>
           </div>
 
@@ -70,7 +70,7 @@
                 name="student-option"
                 value="software-engineering1"
               />
-              Software Engineering Coursework
+              I would like software engineering tips!
             </label>
           </div>
         </div>
@@ -102,7 +102,7 @@
           <div>
             <label>
               <input type="radio" name="student-optionPlan4Year" value="none" />
-              None
+              No Certificate for now!
             </label>
           </div>
         </div>
@@ -111,6 +111,10 @@
       <!-- Options for Existing Credits -->
       <div id="existing-credits-options" style="display: none">
         <div class="checkbox-group">
+          <label>
+            <input type="checkbox" name="course-taken" value="MATH 1111" alt="College Algebra" />
+            MATH 1111</label
+          >
           <label>
             <input type="checkbox" name="course-taken" value="MATH 1113" alt="Precalculus" />
             MATH 1113</label
@@ -464,7 +468,7 @@
         </div>
 
         <div id="preReqForCourse-options" style="display: none">
-          <div id="pre-req-options-container">
+          <div id="pre-req-options-container" class="checkbox-group">
             <label>
               <input type="checkbox" name="find-prereqs" value="MATH 1113" alt="Precalculus" />
               MATH 1113</label
@@ -750,6 +754,14 @@
       </div>
       <button type="button" id="submitButton">Send</button>
     </div>
+
+    <!-- TheGoodAdvisor Greetings-->
+    <input
+      type="text"
+      placeholder="Greetings"
+      id="greetMessageField"
+      style="display: none"
+    />
 
     <!-- Input Message Field -->
     <input

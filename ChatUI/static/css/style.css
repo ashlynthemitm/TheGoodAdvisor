@@ -88,11 +88,7 @@ input[type="text"] {
     font-size: 1rem;
     font-weight: 400;
     color: #000000;
-    /* position: top; */
     margin-top: -250px;
-    /* margin-left: 20%;
-    top: 5;
-    top: 50%; */ 
     margin-left: 200px;
     background-color: rgba(30, 65, 221, 0.986);
 }
@@ -163,9 +159,9 @@ button[type="button"]:hover {
     margin-bottom: 5px;
 }
 .pre-req-options-container {
-    columns: 2; /* Number of columns */
-    -webkit-columns: 2;
-    -moz-columns: 2;
+    columns:4 ; /* Number of columns */
+    -webkit-columns: 4;
+    -moz-columns: 4;
 }
 
 .pre-req-options-container label {

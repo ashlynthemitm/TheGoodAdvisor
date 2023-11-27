@@ -32,7 +32,7 @@ def process_request(): # this method processes all data taken in
 @app.route('/generate-four-year-plan', methods=['POST'])
 def generate_four_year_plan_request(data):
     # Extract needed data from the request
-    completed_courses = data.get('completedCourses', ['MATH 1111'])
+    completed_courses = data.get('completedCourses', [])
     is_data_science = data.get('isDataScience', False)
     is_cyber = data.get('isCYBER', False)
     is_swe = data.get('isSWE', False)
@@ -52,14 +52,15 @@ def generate_four_year_plan_request(data):
     print(four_year_plan)
     
     response = {
-        'fourYearPlan':four_year_plan
+        'fourYearPlan':four_year_plan,
+        'prerequisite': 'Empty'
     }
     return jsonify(response)
   
 @app.route('/find-prerequisite', methods=['POST'])  
 def find_prerequisite_request(data):
-    completed_courses = data.get('completedCourses', [])
-    find_prerequisites = data.get('findPrerequisites', True)
+    completed_courses = data.get('completed_courses', [])
+    find_prerequisites = data.get('find_prerequisites', True)
     is_data_science = data.get('isDataScience', False)
     is_cyber = data.get('isCYBER', False)
     is_swe = data.get('isSWE', False)
@@ -78,6 +79,7 @@ def find_prerequisite_request(data):
     
     print(prerequisite_output)
     response = {
+        'fourYearPlan': 'Empty',
         'prerequisite': prerequisite_output
     }
     return jsonify(response)
