@@ -2,17 +2,22 @@
 <html>
   <head>
     <title>The Good Advisor</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="page-background">
-<div class="header">
-    <h1>
-        <a href="index.html" class="plain-link">The<br>Good<br>Advisor</a>
-    </h1>
-</div>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body class="page-background">
+    <div class="header">
+      <h1>
+        <a href="{{ url_for('index') }}" class="plain-link">The<br />Good<br />Advisor</a
+        >
+      </h1>
+    </div>
 
     <div class="logo">
-      <img src="gsu.png" alt="The Good Advisor" />
+    </body>
+    <img src="{{ url_for('static', filename='images/gsu.png') }}" alt="The Good Advisor">
     </div>
 
     <div class="main-content">
@@ -37,64 +42,85 @@
       <!-- Options for Incoming Freshman -->
       <div id="incoming-freshman-options" style="display: none">
         <div id="freshman-Container">
-            <div>
-                <label>
-                    <input type="radio" name="student-option" value="four-year-plan"> A Four Year Plan
-                </label>
-            </div>
-            <div>
-                <label>
-                    <input type="radio" name="student-option" value="prerequisites1"> Prerequisites for a Course
-                </label>
-            </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="student-option"
+                value="four-year-plan"
+              />
+              A Four Year Plan
+            </label>
+          </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="student-option"
+                value="prerequisites1"
+              />
+              Prerequisites for a Course
+            </label>
+          </div>
 
-
-            <div>
-                <label>
-                    <input type="radio" name="student-option" value="software-engineering1"> Software Engineering Coursework
-                </label>
-            </div>
-
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="student-option"
+                value="software-engineering1"
+              />
+              Software Engineering Coursework
+            </label>
+          </div>
         </div>
+      </div>
 
-    </div>
-
-    <div id="freshplan-select-your-plan" style="display: none;">
+      <div id="freshplan-select-your-plan" style="display: none">
         <div id="freshman-Container">
-            <div>
-                <label>
-                    <input type="radio" name="student-optionPlan4Year" value="data-science-certificate"> Data Science Certificate
-                </label>
-            </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="student-optionPlan4Year"
+                value="data-science-certificate"
+              />
+              Data Science Certificate
+            </label>
+          </div>
 
-            <div>
-                <label>
-                    <input type="radio" name="student-optionPlan4Year" value="cybersecurity-certificate"> CyberSecurity Certificate
-                </label>
-            </div>
-            <div>
-                <label>
-                    <input type="radio" name="student-optionPlan4Year" value="none"> None
-                </label>
-            </div>
+          <div>
+            <label>
+              <input
+                type="radio"
+                name="student-optionPlan4Year"
+                value="cybersecurity-certificate"
+              />
+              CyberSecurity Certificate
+            </label>
+          </div>
+          <div>
+            <label>
+              <input type="radio" name="student-optionPlan4Year" value="none" />
+              None
+            </label>
+          </div>
         </div>
-    </div>
-
-
-
+      </div>
 
       <!-- Options for Existing Credits -->
       <div id="existing-credits-options" style="display: none">
         <div class="checkbox-group">
           <label>
-            <input type="checkbox" name="course-taken" value="Precalculus" />
+            <input type="checkbox" name="course-taken" value="MATH 1113" alt="Precalculus" />
             MATH 1113</label
           >
           <label>
             <input
               type="checkbox"
               name="course-taken"
-              value="Calculus of One Variable I"
+              value="MATH 2211"
+              alt"Calculus of One Variable I"
             />
             MATH 2211</label
           >
@@ -103,7 +129,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Calculus of One Variable II"
+              value="MATH 2212"
+              alt="Calculus of One Variable II"
             />
             MATH 2212
           </label>
@@ -111,7 +138,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Multivariate Calculus"
+              value="MATH 2215"
+              alt="Multivariate Calculus"
             />
             MATH 2215
           </label>
@@ -119,7 +147,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Principles of Computer Science I"
+              value="CSC 1301"
+              alt="Principles of Computer Science I"
             />
             CSC 1301
           </label>
@@ -127,7 +156,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Principles of Computer Science II"
+              value="CSC 1302"
+              alt="Principles of Computer Science II"
             />
             CSC 1302
           </label>
@@ -135,7 +165,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Theoretical Foundations of Computer Science"
+              value="CSC 2510"
+              alt="Theoretical Foundations of Computer Science"
             />
             CSC 2510
           </label>
@@ -143,7 +174,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Discrete Mathematics"
+              value="MATH 2420"
+              alt="Discrete Mathematics"
             />
             MATH 2420
           </label>
@@ -151,7 +183,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Linear Algebra I"
+              value="MATH 2641"
+              alt="Linear Algebra I"
             />
             MATH 2641
           </label>
@@ -159,7 +192,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Data Structures"
+              value="CSC 2720"
+              alt="Data Structures"
             />
             CSC 2720
           </label>
@@ -167,7 +201,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Applied Probability and Statistics for Computer Science"
+              value="MATH 3020"
+              alt="Applied Probability and Statistics for Computer Science"
             />
             MATH 3020
           </label>
@@ -175,7 +210,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Computer Organization and Programming"
+              value="CSC 3210"
+              alt="Computer Organization and Programming"
             />
             CSC 3210
           </label>
@@ -183,7 +219,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="System-Level Programming"
+              value="CSC 3320"
+              alt="System-Level Programming"
             />
             CSC 3320
           </label>
@@ -191,7 +228,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Software Development-CTW"
+              value="CSC 3350"
+              alt="Software Development-CTW"
             />
             CSC 3350
           </label>
@@ -199,7 +237,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Operating Systems"
+              value="CSC 4320"
+              alt="Operating Systems"
             />
             CSC 4320
           </label>
@@ -207,7 +246,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Programming Language Concepts"
+              value="CSC 4330"
+              alt="Programming Language Concepts"
             />
             CSC 4330
           </label>
@@ -215,7 +255,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Capstone Senior Design I-CTW"
+              value="CSC 4351"
+              alt="Capstone Senior Design I-CTW"
             />
             CSC 4351
           </label>
@@ -223,7 +264,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Capstone Senior Design II-CTW"
+              value="CSC 4352"
+              alt="Capstone Senior Design II-CTW"
             />
             CSC 4352
           </label>
@@ -231,7 +273,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Design and Analysis of Algorithms"
+              value="CSC 4520"
+              alt="Design and Analysis of Algorithms"
             />
             CSC 4520
           </label>
@@ -239,7 +282,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Fundamentals of Data Science"
+              value="CSC 4780"
+              alt="Fundamentals of Data Science"
             />
             CSC 4780
           </label>
@@ -247,7 +291,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Database Systems"
+              value="CSC 4710"
+              alt="Database Systems"
             />
             CSC 4710
           </label>
@@ -255,19 +300,22 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Data Visualization"
+              value="CSC 4730"
+              alt="Data Visualization"
             />
             CSC 4730
           </label>
           <label>
-            <input type="checkbox" name="course-taken" value="Data Mining" />
+            <input type="checkbox" name="course-taken" value="CSC 4710"
+            alt="Data Mining" />
             CSC 4740
           </label>
           <label>
             <input
               type="checkbox"
               name="course-taken"
-              value="Design and Analysis of Algorithms"
+              value="CSC 4520"
+              alt="Design and Analysis of Algorithms"
             />
             CSC 4520
           </label>
@@ -275,7 +323,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Big Data Programming"
+              value="CSC 4760"
+              alt="Big Data Programming"
             />
             CSC 4760
           </label>
@@ -283,7 +332,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Machine Learning"
+              value="CSC 4850"
+              alt="Machine Learning"
             />
             CSC 4850
           </label>
@@ -291,7 +341,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Fundamentals of Cybersecurity"
+              value="CSC 4222"
+              alt="Fundamentals of Cybersecurity"
             />
             CSC 4222
           </label>
@@ -299,7 +350,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Computer Networks"
+              value="CSC 4220"
+              alt="Computer Networks"
             />
             CSC 4220
           </label>
@@ -307,19 +359,21 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Mobile Computing and Wireless Network Security"
+              value="CSC 4221"
+              alt="Mobile Computing and Wireless Network Security"
             />
             CSC 4221
           </label>
           <label>
-            <input type="checkbox" name="course-taken" value="Privacy" /> CSC
-            4223
+            <input type="checkbox" name="course-taken" value="CSC 4223"
+            alt="Privacy" /> CSC 4223
           </label>
           <label>
             <input
               type="checkbox"
               name="course-taken"
-              value="Secure Software Engineering"
+              value="CSC 4226"
+              alt="Secure Software Engineering"
             />
             CSC 4226
           </label>
@@ -327,7 +381,8 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Network Security "
+              value="CSC 4227"
+              alt="Network Security "
             />
             CSC 4227
           </label>
@@ -335,11 +390,14 @@
             <input
               type="checkbox"
               name="course-taken"
-              value="Computer Forensics"
+              value="CSC 4251"
+              alt="Computer Forensics"
             />
             CSC 4251
           </label>
         </div>
+
+        
         <div id="ExistingCredits2-options" style="display: none">
           <div id="existing-credits-container">
             <div>
@@ -408,397 +466,286 @@
         <div id="preReqForCourse-options" style="display: none">
           <div id="pre-req-options-container">
             <label>
-              <input type="radio" name="course-taken" value="Precalculus" />
+              <input type="checkbox" name="find-prereqs" value="MATH 1113" alt="Precalculus" />
               MATH 1113</label
             >
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Calculus of One Variable I"
+                type="checkbox"
+                name="find-prereqs"
+                value="MATH 2211"
+              alt"Calculus of One Variable I"
               />
               MATH 2211</label
             >
 
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Calculus of One Variable II"
+                type="checkbox"
+                name="find-prereqs"
+                value="MATH 2212"
+                alt="Calculus of One Variable II"
               />
               MATH 2212
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Multivariate Calculus"
+                type="checkbox"
+                name="find-prereqs"
+                value="MATH 2215"
+              alt="Multivariate Calculus"
               />
               MATH 2215
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Principles of Computer Science I"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 1301"
+              alt="Principles of Computer Science I"
               />
               CSC 1301
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Principles of Computer Science II"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 1302"
+                alt="Principles of Computer Science II"
               />
               CSC 1302
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Theoretical Foundations of Computer Science"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 2510"
+              alt="Theoretical Foundations of Computer Science"
               />
               CSC 2510
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Discrete Mathematics"
+                type="checkbox"
+                name="find-prereqs"
+                value="MATH 2420"
+                alt="Discrete Mathematics"
               />
               MATH 2420
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Linear Algebra I"
+                type="checkbox"
+                name="find-prereqs"
+                value="MATH 2641"
+              alt="Linear Algebra I"
               />
               MATH 2641
             </label>
             <label>
-              <input type="radio" name="course-taken" value="Data Structures" />
+              <input type="checkbox" name="find-prereqs" value="CSC 2720"
+              alt="Data Structures" />
               CSC 2720
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Applied Probability and Statistics for Computer Science"
+                type="checkbox"
+                name="find-prereqs"
+                value="MATH 3020"
+              alt="Applied Probability and Statistics for Computer Science"
               />
               MATH 3020
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Computer Organization and Programming"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 3210"
+                alt="Computer Organization and Programming"  
               />
               CSC 3210
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="System-Level Programming"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 3320"
+              alt="System-Level Programming"
               />
               CSC 3320
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Software Development-CTW"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 3350"
+              alt="Software Development-CTW"
               />
               CSC 3350
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Operating Systems"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4320"
+              alt="Operating Systems"
               />
               CSC 4320
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Programming Language Concepts"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4330"
+              alt="Programming Language Concepts"
               />
               CSC 4330
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Capstone Senior Design I-CTW"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4351"
+                alt="Capstone Senior Design I-CTW"
               />
               CSC 4351
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Capstone Senior Design II-CTW"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4352"
+              alt="Capstone Senior Design II-CTW"
               />
               CSC 4352
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Design and Analysis of Algorithms"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4520"
+              alt="Design and Analysis of Algorithms"
               />
               CSC 4520
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Fundamentals of Data Science"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4780"
+              alt="Fundamentals of Data Science"
               />
               CSC 4780
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Database Systems"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4710"
+                alt="Database Systems"
               />
               CSC 4710
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Data Visualization"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4730"
+              alt="Data Visualization"
               />
               CSC 4730
             </label>
             <label>
-              <input type="radio" name="course-taken" value="Data Mining" /> CSC
-              4740
+              <input type="checkbox" name="find-prereqs"  value="CSC 4710"
+              alt="Data Mining" 
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Design and Analysis of Algorithms"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4520"
+              alt="Design and Analysis of Algorithms"
               />
               CSC 4520
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Big Data Programming"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4760"
+              alt="Big Data Programming"
               />
               CSC 4760
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Machine Learning"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4850"
+                alt="Machine Learning"
               />
               CSC 4850
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Fundamentals of Cybersecurity"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4222"
+              alt="Fundamentals of Cybersecurity"
               />
               CSC 4222
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Computer Networks"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4220"
+              alt="Computer Networks"
               />
               CSC 4220
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Mobile Computing and Wireless Network Security"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4221"
+              alt="Mobile Computing and Wireless Network Security"
               />
               CSC 4221
             </label>
             <label>
-              <input type="radio" name="course-taken" value="Privacy" /> CSC
+              <input type="checkbox" name="find-prereqs"  value="CSC 4223"
+              alt="Privacy" /> CSC
               4223
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Secure Software Engineering"
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4226"
+                alt="Secure Software Engineering"
               />
               CSC 4226
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Network Security "
+                type="checkbox"
+                name="find-prereqs"
+                value="CSC 4227"
+              alt="Network Security"
               />
               CSC 4227
             </label>
             <label>
               <input
-                type="radio"
-                name="course-taken"
-                value="Computer Forensics"
+                type="checkbox"
+                name="find-prereqs"
+              value="CSC 4251"
+              alt="Computer Forensics"
               />
               CSC 4251
             </label>
-        </div>
-        <div id="ExistingCredits2-options" style="display: none;">
-            <div id="existing-credits-container">
-                <div>
-                    <label>
-                        <input type="radio" name="existing-option" value="Pre-Req For Course"> Pre-Req For Course
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input type="radio" name="existing-option" value="Software Engineering Internship"> Software Engineering Internship
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input type="radio" name="existing-option" value="Remaining Plan"> Remaining Plan
-                    </label>
-                </div>
-            </div>
-        </div>
-        <div id="ExistingCredits2-RemainingPlan" style="display: none;">
-            <div id="existing-credits-container">
-                <div>
-                    <label>
-                        <input type="radio" name="existing-option" value="datascience-cert"> Data Science Certificate
-                    </label>
-                </div>
-
-                <div>
-                    <label>
-                        <input type="radio" name="existing-option" value="cyber-security-cert"> CyberSecurity Certificate
-                    </label>
-                </div>
-                <div>
-                    <label>
-                        <input type="radio" name="existing-option" value="none"> None
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div id="preReqForCourse-options" style="display: none;">
-            <div id="pre-req-options-container">
-                <label>
-                    <input type="radio" name="course-taken" value="Precalculus"> MATH 1113</label>
-                <label>
-                    <input type="radio" name="course-taken" value="Calculus of One Variable I"> MATH 2211</label>
-
-                <label>
-                    <input type="radio" name="course-taken" value="Calculus of One Variable II"> MATH 2212
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Multivariate Calculus"> MATH 2215
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Principles of Computer Science I"> CSC 1301
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Principles of Computer Science II"> CSC 1302
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Theoretical Foundations of Computer Science"> CSC 2510
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Discrete Mathematics"> MATH 2420
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Linear Algebra I"> MATH 2641
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Data Structures"> CSC 2720
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Applied Probability and Statistics for Computer Science"> MATH 3020
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Computer Organization and Programming"> CSC 3210
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="System-Level Programming"> CSC 3320
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Software Development-CTW"> CSC 3350
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Operating Systems"> CSC 4320
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Programming Language Concepts"> CSC 4330
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Capstone Senior Design I-CTW"> CSC 4351
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Capstone Senior Design II-CTW"> CSC 4352
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Design and Analysis of Algorithms"> CSC 4520
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Fundamentals of Data Science"> CSC 4780
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Database Systems"> CSC 4710
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Data Visualization"> CSC 4730
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Data Mining"> CSC 4740
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Design and Analysis of Algorithms"> CSC 4520
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Big Data Programming"> CSC 4760
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Machine Learning"> CSC 4850
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Fundamentals of Cybersecurity"> CSC 4222
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Computer Networks"> CSC 4220
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Mobile Computing and Wireless Network Security"> CSC 4221
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Privacy"> CSC 4223
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Secure Software Engineering"> CSC 4226
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Network Security "> CSC 4227
-                </label>
-                <label>
-                    <input type="radio" name="course-taken" value="Computer Forensics"> CSC 4251
-                </label>
-            </div>
-
+          </div>
         </div>
       </div>
       <button type="button" id="submitButton">Send</button>
@@ -816,8 +763,9 @@
     <div class="output-message" id="outputMessageField" style="display: none">
       <!-- Output message content goes here -->
     </div>
-
-<!-- Include the JavaScript file -->
-<script src="script.js"></script>
-</body>
+        <!-- Include jQuery (you can use other libraries or vanilla JS) -->
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- Include the JavaScript file -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
 </html>
