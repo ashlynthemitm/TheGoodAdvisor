@@ -27,14 +27,14 @@ class ChatOutput:
         # returns a dictionary of prereqs
         course_prerequisites = ChatAlgorithm.main(completed_courses=completed_courses, find_prerequisites=find_prerequisites, create_four_year_plan=False, isDataScience=False, isCYBER=False, isSWE=False)
         
-        self.output += f'The Prerequisites for the courses you have requested are,\n'
+        self.output += f'The Prerequisites for the courses you have requested are,<br>'
         
         for course in course_prerequisites.keys():
             if course_prerequisites[course]:
                 prereqs = ', '.join(map(str, course_prerequisites[course]))
-                self.output += f'{course} requires, {prereqs}\n'
+                self.output += f'{course} requires, {prereqs}<br>'
             else:
-                self.output += f'{course} does not require any prerequisites\n'
+                self.output += f'{course} does not require any prerequisites<br>'
             
         return self.output
     
