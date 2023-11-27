@@ -51,16 +51,17 @@
 input[type="text"] {
     width: calc(50% - 200px);
     padding: 0.5rem;
-    border: 1px solid #00a8c5;
+    border: 5px solid rgba(30, 65, 221, 0.986);
     border-radius: 0.5rem;
     font-family: "Proxima Nova", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     color: #000000;
-    position: absolute;
-    bottom: 45rem;
-    left: 35em;
-    background-color: #dcdcdc; /* Use the same background color as the body */
+    position: relative;
+    top: 50%;
+    transform: translateY(-700%);
+    left: 35%;
+    background-color: rgba(30, 65, 221, 0.986); /* Use the same background color as the body */
 }
 
 /* Status message */
@@ -72,25 +73,30 @@ input[type="text"] {
     font-family: "Proxima Nova", sans-serif;
     font-size: 1rem;
     font-weight: 400;
-    color: #00a8c5;
+    color: rgba(30, 65, 221, 0.986);
     background-color: #dcdcdc; /* Use the same background color as the body */
 }
 
 /* Output Message Field */
 .output-message {
-    width: calc(50% - 200px); /* Match the same width as the input message field */
+    width: 40%;
+    /* calc(50% - 200px); */
     padding: 0.5rem;
-    border: 1px solid #00a8c5;
+    border: 5px solid rgba(30, 65, 221, 0.986);
     border-radius: 0.5rem;
     font-family: "Proxima Nova", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     color: #000000;
-    position: absolute;
-    bottom: 38rem;
-    left: 13em; /* Adjust the left position to match the input message field */
-    background-color: #dcdcdc; /* Use the same background color as the body */
+    /* position: top; */
+    margin-top: -250px;
+    /* margin-left: 20%;
+    top: 5;
+    top: 50%; */ 
+    margin-left: 200px;
+    background-color: rgba(30, 65, 221, 0.986);
 }
+
 
 /* Right tab */
 .right-tab {
@@ -126,9 +132,9 @@ button[type="button"] {
     margin-top: 1rem;
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #00a8c5;
+    border: 1px solid rgba(30, 65, 221, 0.986);
     border-radius: 0.5rem;
-    background-color: #00a8c5;
+    background-color: rgba(30, 65, 221, 0.986);
     color: #ffffff;
     font-family: "Proxima Nova", sans-serif;
     font-size: 1rem;
@@ -166,4 +172,3 @@ button[type="button"]:hover {
     display: block;
     margin-bottom: 8px;
 }
-

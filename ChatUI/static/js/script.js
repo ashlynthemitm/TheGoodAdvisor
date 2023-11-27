@@ -1,5 +1,14 @@
+// Global Variables representing the data to be sent to Flask
+let completed_courses = []  // default, no courses have been completed
+let find_prerequisites = [] // default, no prerequisites to be found
+// Default, False values for other params
+let create_four_year_plan = false
+let isDataScience = false
+let isCYBER = false
+let isSWE = false
 document.getElementById("submitButton").addEventListener("click", function() {
-	
+	// Upon Submission these are the values collected from the buttons
+
     var selectedStudentType = document.querySelector('input[name="student-type"]:checked');
 	
 	var studentPlan4Year = document.querySelector('input[name="student-optionPlan4Year"]:checked');
@@ -22,14 +31,77 @@ document.getElementById("submitButton").addEventListener("click", function() {
     var existingCyberSecurityCertificateOption = document.querySelector('input[name="existing-option"][value="cyber-security-cert"]');
 	var existingNoneOption = document.querySelector('input[name="existing-option"][value="none"]');
     outputMessageField.textContent = ""; // Clear existing output message
-
-
     outputMessageField.style.display = "block";
+    
+
+     // save the values to be used in the sendPythonFunction
+
+    
+    // Completed Courses
+
+        var taken_courses = document.querySelectorAll('input[name="course-taken"]:checked');
+        
+        // Loop through the checked checkboxes and push their values to the array
+        taken_courses.forEach(function (checkbox) {
+            completed_courses.push(checkbox.value);
+        });
+        console.log("Completed Courses: ",completed_courses)
+        
+    
+        var studentOptionRadios = document.querySelectorAll('input[name="student-option"]');
+        var clickedStudentOption;
+        studentOptionRadios.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                clickedStudentOption = radioButton.value;
+            }
+        });
+        console.log(clickedStudentOption)
+        if (clickedStudentOption == 'four-year-plan') {
+            create_four_year_plan = true
+            console.log(create_four_year_plan)
+        } else if (clickedStudentOption == 'prerequisites1') {
+            // collect the prerequisites selected
+            var find_prereq_courses = document.querySelectorAll('input[name="find-prereqs"]:checked');
+    
+        // Loop through the checked checkboxes and push their values to the array
+        find_prereq_courses.forEach(function (checkbox) {
+            find_prerequisites.push(checkbox.value);
+        });
+        console.log("Find The Prerequisites for: ",find_prerequisites)
+
+
+        }else if (clickedStudentOption == 'software-engineering1') {
+            // complete this addditional functionality later
+            isSWE = true
+        }
+
+        var studentCertificateOptions = document.querySelectorAll('input[name="student-optionPlan4Year"]');
+        var clickedStudentCertificate;
+        studentCertificateOptions.forEach(function(radioButton) {
+            if (radioButton.checked) {
+                clickedStudentCertificate = radioButton.value;
+            }
+        });
+
+        if (clickedStudentCertificate== 'data-science-certificate') {
+            isDataScience = true
+            console.log('Data Science Certificate was selected')
+        } else if (clickedStudentCertificate == 'cybersecurity-certificate') {
+            isCYBER = true
+            console.log('CyberSecurity Certificate was selected')
+        } else {
+            // no certificate was selected
+        }
+
+        /*
+        I have set each of these values before anything gets printed so now i can
+        call the function within the final output chat section
+        */ 
 
 
     if (selectedStudentType) {
         var selectedValue = selectedStudentType.value;
-
+        // completed_courses stays empty 
         if (selectedValue === "incoming-freshman") {
             if(selectedValue==="incoming-freshman") {
                 inputMessageField.value = "Incoming Freshman";
@@ -61,20 +133,20 @@ document.getElementById("submitButton").addEventListener("click", function() {
 							
 								var valuePlan =  document.querySelector('input[name=student-optionPlan4Year]:checked').value;
 								if(valuePlan === "data-science-certificate"){
-									outputMessageField.textContent = "Here is your 4 year plan, with Data Science";
+								    callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
 								}
 								else if(valuePlan === "cybersecurity-certificate"){
-									outputMessageField.textContent = "Here is your 4 year plan, with CyberSecurity";
+									callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
 								}
 								else if(valuePlan === "none"){
-									outputMessageField.textContent = "Here is your 4 year plan, You have selected none";
+                                    callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
 								}
 							
 						})   
 
                     }
                     else if (softwareEngineeringCourseworkOption && softwareEngineeringCourseworkOption.checked) {
-                        outputMessageField.textContent = "Here is your Software Engineering Coursework. Take CSC as soon as possible.";
+                        outputMessageField.textContent = "Here is your Software Engineering Coursework. Take CSC 2720 as soon as possible.";
                         var rightTab = document.querySelector('.right-tab');
                         rightTab.style.display = "none";
                         var statusMessage = document.getElementById('statusMessageField');
@@ -100,12 +172,11 @@ document.getElementById("submitButton").addEventListener("click", function() {
                         sendButton.style.transform = 'translateX(-50%)';
                         sendButton.style.width = ''; // Reset width to default (if overridden)
                         sendButton.style.height = '';
-                        var preReqSelected = document.querySelector('input[name="course-taken"]:checked');
+                        var preReqSelected = document.querySelector('input[name="find-prereqs"]:checked');
 
                         if (preReqSelected) {
 							
                             var selectedCourse = preReqSelected.value;
-
                             // Display pre-requisites for the selected course in the output message field
                             inputMessageField.value = "Pre-requisite for Course";
                             outputMessageField.textContent = `Here are the pre-requisites for ${selectedCourse}: [List your pre-requisites here]`;
@@ -264,34 +335,46 @@ document.getElementById("submitButton").addEventListener("click", function() {
             }
         }
 
-
-
         // Show the input and output fields only after clicking send
         inputMessageField.style.display = "block";
         outputMessageField.style.display = "block";
+    
+}
 
 
+function callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE) {
+    // Make an AJAX request to the Flask server
+    $.ajax({
+        type: 'POST',
+        url: '/process-request',
+        contentType: 'application/json;charset=UTF-8',
+        data: JSON.stringify({
+            completed_courses: completed_courses, 
+            find_prerequisites: find_prerequisites, 
+            create_four_year_plan: create_four_year_plan, 
+            isDataScience: isDataScience, 
+            isCYBER: isCYBER, 
+            isSWE: isSWE
+        }),
+        success: function (response) {
+            // Handle the response from the server
+            if ( typeof response.fourYearPlan == 'string' ) {
+                console.log(response.fourYearPlan);
+                var formattedText = response.fourYearPlan.replace(/\n/g, '<br>');
+                outputMessageField.innerHTML = formattedText;
+                
+            } else {
+                // If it's not a string, handle accordingly
+                console.error('Invalid response format for fourYearPlan:', fourYearPlan);
+                outputMessageField.textContent = 'Error: Invalid response format for fourYearPlan';
+            }
 
-    }
-    // sendRequestToServer('/generate-four-year-plan', requestData);
-    // sendRequestToServer('/find-prerequisite', requestData);
-    function sendReuestToServer(url, requestData) {
-        fetch(url, {
-            method:'POST',
-            headers: {
-                'Content-type':'application/json',
-            },
-            body: JSON.stringify(requestData),
-        })
-            .then(response => response.json())
-            .then(data=>
-            { document.getElementById("outputMessageField").textContent = JSON.stringify(data);
-            })
-            .catch(error=>{
-                console.error('Error:', error)
-                document.getElementById("outputMessageField").textContent = 'An error occurred';
-            })
-    }
+        },
+        error: function (error) {
+            console.error(error);
+            outputMessageField.textContent = "Thank you for using the Good Advisor!";
+        }
+});
+}
 
 });
-
