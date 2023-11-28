@@ -6,6 +6,7 @@ let create_four_year_plan = false
 let isDataScience = false
 let isCYBER = false
 let isSWE = false
+existingOnce = true
 document.getElementById("submitButton").addEventListener("click", function() {
 	// Upon Submission these are the values collected from the buttons
 
@@ -43,7 +44,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
         
         // Loop through the checked checkboxes and push their values to the array
         taken_courses.forEach(function (checkbox) {
-            completed_courses.push(checkbox.value);
+            completed_courses.push(String(checkbox.value));
         });
         console.log("Completed Courses: ",completed_courses)
         
@@ -218,230 +219,137 @@ document.getElementById("submitButton").addEventListener("click", function() {
             }
         } else if (selectedValue === "existing-credits") {
             if (selectedValue === "existing-credits") {
-                inputMessageField.value = "I have AP/dual enrollment credits!";
-                outputMessageField.textContent = "Welcome to Georgia State University! We are excited to have you join our incoming freshman class. Please select the courses you have already taken.";
-                rightTabHeading.textContent = "Select Courses Taken";
-                var studentTypeContainer = document.querySelector('.radio-group');
-                studentTypeContainer.innerHTML = '';
-                incomingFreshmanOptions.style.display = "none";
-                existingCreditsOptions.style.display = "block";
-
-                
-                var sendButton1 = document.getElementById('submitButton');
-                sendButton1.addEventListener('click', function (){
-                rightTabHeading.textContent = "How May I Assist You?";
-                var studentTypeContainer = document.querySelector('.radio-group');
-                studentTypeContainer.innerHTML = '';
-                incomingFreshmanOptions.style.display = "block";
-                existingCreditsOptions.style.display = "none";
-                })
-                
-                var sendButton1 = document.getElementById('submitButton');
-                sendButton1.addEventListener('click', function (){
-                    if (fourYearPlanOption && fourYearPlanOption.checked) {
-						inputMessageField.value = "I have AP/dual enrollment credits!";
-						outputMessageField.textContent = "Welcome to Georgia State University! We are excited to have you join our incoming freshman class.";
-						rightTabHeading.textContent = "Would you like to pursue a Certification?";
-						
-						//alert(fourYearPlanOption.value);
-						incomingFreshmanOptions.style.display = "none";
-						existingCreditsOptions.style.display = "block";
-						fresherSelectYourPlan.style.display = "block";
-						//alert("inner");
-						
-						
-						var sendButton1 = document.getElementById('submitButton');
-						sendButton1.addEventListener('click', function (){
-							
-								var valuePlan =  document.querySelector('input[name=student-optionPlan4Year]:checked').value;
-								if(valuePlan === "data-science-certificate"){
-								    callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
-								}
-								else if(valuePlan === "cybersecurity-certificate"){
-									callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
-								}
-								else if(valuePlan === "none"){
-                                    callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
-								}
-							
-						})   
-
-                    }
-                    else if (softwareEngineeringCourseworkOption && softwareEngineeringCourseworkOption.checked) {
-                        outputMessageField.textContent = "Build a strong foundation with core courses like Introduction to Computer Science and Object-Oriented Programming 'CSC 1301 & 1302' and Data Structures 'CSC 2720'. Dive into software development principles, Agile methodologies, and version control for comprehensive skills, such as using Github for personal projects. Explore Web Development either at GSU or with CodePath online courses, databases using SQL or courses such as Database Systems 'CSC 4710', learn new languages, and key areas like Operating Systems 'CSC 4320' and Computer Networks 'CSC 4220'. Enhance your expertise in Software Testing 'CSC 3350', Cybersecurity, and emerging technologies, while gaining practical experience through internships and developing essential soft skills by attending conferences and summits.";
-                        var rightTab = document.querySelector('.right-tab');
-                        rightTab.style.display = "none";
-                        var statusMessage = document.getElementById('statusMessageField');
-                        statusMessage.textContent = '';
-                    }
-
-                    else if (preReqForCourseOption && preReqForCourseOption.checked) {
-                        inputMessageField.value = "I need prerequisites for courses!";
-                        outputMessageField.textContent = "Select and send the course you would like a pre-requisite for on the right tab.";
-                        rightTabHeading.textContent = "Select The Courses";
-                        incomingFreshmanOptions.style.display = "none";
-                        existingCreditsOptions.style.display = "none";
-
-                        var preReqForCourseOptionsContainer = document.getElementById("pre-req-options-container");
-                        var sendButton = document.getElementById('submitButton');
-                        var rightTab = document.querySelector('.right-tab');
-                        rightTab.appendChild(preReqForCourseOptionsContainer); // Append pre-requisite radio buttons to the right tab
-                        preReqForCourseOptionsContainer.style.display = "block";
-
-                        sendButton.style.position = 'absolute';
-                        sendButton.style.bottom = '1rem'; // Set desired bottom position
-                        sendButton.style.left = '50%'; // Set left position to the center
-                        sendButton.style.transform = 'translateX(-50%)';
-                        sendButton.style.width = ''; // Reset width to default (if overridden)
-                        sendButton.style.height = '';
-                        var preReqSelected = document.querySelector('input[name="find-prereqs"]:checked');
-
-                        if (preReqSelected) {
-							
-                            var selectedCourse = preReqSelected.value;
-                            // Display pre-requisites for the selected course in the output message field
-                            inputMessageField.value = "I need prerequisites for courses!";
-
-                            callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
-								
-
-                            // Hide the right tab
-                            var rightTab = document.querySelector('.right-tab');
-                            rightTab.style.display = "none";
-
-                            // Clear any existing status or messages
-                            var statusMessage = document.getElementById('statusMessageField');
-                            statusMessage.textContent = '';
-                        }
-                    }
-
-                    else if (dataScienceCertificateOption && dataScienceCertificateOption.checked) {
-                        outputMessageField.textContent = "Here is your Data Science Certificate Coursework.";
-                        var rightTab = document.querySelector('.right-tab');
-                        rightTab.style.display = "none";
-                        var statusMessage = document.getElementById('statusMessageField');
-                        statusMessage.textContent = '';
-                    }
-                    else if (cyberSecurityCertificateOption && cyberSecurityCertificateOption.checked) {
-                        outputMessageField.textContent = "Here is your CyberSecurity Certificate Coursework.";
-                        var rightTab = document.querySelector('.right-tab');
-                        rightTab.style.display = "none";
-                        var statusMessage = document.getElementById('statusMessageField');
-                        statusMessage.textContent = '';
-                    }
-                    else{
-                        // Handle the case if no course is selected for pre-requisites
-                        outputMessageField.textContent = "Please select a course for pre-requisites.";
-                    }
-                })
-
+            if (existingOnce) {
+                    existingOnce = false
+                    inputMessageField.value = "I have AP/dual enrollment credits!";
+                    outputMessageField.textContent = "Welcome to Georgia State University! We are excited to have you join our incoming freshman class. Please select the courses you have already taken.";
+                    rightTabHeading.textContent = "Select Courses Taken";
+                    var studentTypeContainer = document.querySelector('.radio-group');
+                    studentTypeContainer.innerHTML = '';
+                    incomingFreshmanOptions.style.display = "none";
+                    existingCreditsOptions.style.display = "block";
+                }
                 // // Checkboxes logic when at least one checkbox is selected and "Send" is clicked
-                // var sendButton2 = document.getElementById('submitButton');
-                // sendButton2.addEventListener('click', function () {var checkboxes = document.querySelectorAll('input[name="course-taken"]:checked');
-                //     if (checkboxes.length > 0) {
-                //         inputMessageField.value = "I need prerequisites for courses!";
-                //         outputMessageField.textContent = "Select an option on the right tab";
-                //         rightTabHeading.textContent = "Select An Option";
-                //         incomingFreshmanOptions.style.display = "none";
-                //         existingCreditsOptions.style.display = "none";
+                var sendButton10 = document.getElementById('submitButton');
+                sendButton10.addEventListener('click', function () {
+                var checkboxes = document.querySelectorAll('input[name="course-taken"]:checked');
+                inputMessageField.value = "I have AP/dual enrollment credits!";
+                outputMessageField.textContent = "Welcome to Georgia State University! We are excited to have you join our incoming freshman class.";
+                rightTabHeading.textContent = "How May I Assist You?";
+                    var studentTypeContainer = document.querySelector('.radio-group');
+                    studentTypeContainer.innerHTML = '';
+                    incomingFreshmanOptions.style.display = "block";
+                    existingCreditsOptions.style.display = "none";
+                // Now you can do something with the 'checkboxes' variable
+                checkboxes.forEach(function (checkbox) {
+                    console.log(checkbox.value); // Example: log the value of each checked checkbox
+                });
+                });
+                    
+                        // inputMessageField.value = "I need prerequisites for courses!";
+                        // outputMessageField.textContent = "Select an option on the right tab";
+                        // rightTabHeading.textContent = "Select An Option";
+                        // incomingFreshmanOptions.style.display = "none";
+                        // existingCreditsOptions.style.display = "none";
 
-                //         // Assuming there's a container for the new options
-				// 		var remainingPlan = document.getElementById("ExistingCredits2-RemainingPlan");
-						
-                //         var existingCredits2Options = document.getElementById("ExistingCredits2-options");
-                //         var rightTab = document.querySelector('.right-tab');
-                //         rightTab.appendChild(existingCredits2Options); // Append the new options to the right tab
-                //         existingCredits2Options.style.display = "block";
-                //         var softwareEngineeringInternshipOption = document.querySelector('input[name="existing-option"][value="Software Engineering Internship"]');
-                //         var remainingPlanOption = document.querySelector('input[name="existing-option"][value="Remaining Plan"]');
-                //         var prereqoption = document.querySelector('input[name="existing-option"][value="Pre-Req For Course"]');
-                //         if (softwareEngineeringInternshipOption && softwareEngineeringInternshipOption.checked) {
-                //             outputMessageField.textContent = "Here is the track to prepare for a SWE Internship.";
-                //             // Additional logic if needed for the SWE Internship track
-                //         } else if (remainingPlanOption && remainingPlanOption.checked) {
-							
-				// 			rightTabHeading.textContent = "Please select a Concentration";
-				// 			existingCredits2Options.style.display = "none";
-							
-							
-							
-				// 			var rightTabRemain = document.querySelector('.right-tab');
-				// 			rightTabRemain.appendChild(remainingPlan);
-				// 			remainingPlan.style.display = "block";
-							
-                //             outputMessageField.textContent = "Here are the list of courses needed in order for you to graduate.";
-                //             // Additional logic for the remaining plan
-                //         } else if (prereqoption && prereqoption.checked) {         
-				// 			//alert("error");               
-				// 			inputMessageField.value = "I need prerequisites for courses!";
-                //             outputMessageField.textContent = "Select and send the course you would like a pre-requisite for on the right tab.";
-                //             rightTabHeading.textContent = "Select The Courses";
-                //             incomingFreshmanOptions.style.display = "none";
-                //             existingCreditsOptions.style.display = "none";
-
-                //             var preReqForCourseOptionsContainer = document.getElementById("pre-req-options-container");
-                //             var sendButton = document.getElementById('submitButton');
-                //             var rightTab = document.querySelector('.right-tab');
-                //             rightTab.appendChild(preReqForCourseOptionsContainer); // Append pre-requisite radio buttons to the right tab
-                //             preReqForCourseOptionsContainer.style.display = "block";
-
-                //             sendButton.style.position = 'absolute';
-                //             sendButton.style.bottom = '1rem'; // Set desired bottom position
-                //             sendButton.style.left = '50%'; // Set left position to the center
-                //             sendButton.style.transform = 'translateX(-50%)';
-                //             sendButton.style.width = ''; // Reset width to default (if overridden)
-                //             sendButton.style.height = '';
-                //             var preReqSelected = document.querySelector('input[name="course-taken"]:checked');
-
-                //             if (preReqSelected) {
-								
-								
-                //                 var selectedCourse = preReqSelected.value;
-	
-                //                 // Display pre-requisites for the selected course in the output message field
-                //                 inputMessageField.value = "I need prerequisites for courses!";
-                //                 outputMessageField.textContent = `Here are the pre-requisites for ${selectedCourse}: [List your pre-requisites here]`;
-				// 				existingOptions.style.display = "none";
-                //                 // Hide the right tab
-                //                 var rightTab = document.querySelector('.right-tab');
-                //                 rightTab.style.display = "block";
-								
-				// 				var sendButton2 = document.getElementById('submitButton');
-				// 				sendButton2.addEventListener('click', function(){
-				// 					//alert("entered in field");
-				// 					rightTab.style.display = "none";
-				// 					outputMessageField.textContent = `Here are the pre-requisites for all the course(Here you can display your desired message)`;
-				// 				})
-                //                 // Clear any existing status or messages
-                //                 var statusMessage = document.getElementById('statusMessageField');
-                //                 statusMessage.textContent = '';
-                //             }
-
-                //         }
-                //         else if (existingDataScienceCertificateOption && existingDataScienceCertificateOption.checked) {
-                //             outputMessageField.textContent = "Here is your Data Science Certificate Coursework.";
-                //             var rightTab = document.querySelector('.right-tab');
-                //             rightTab.style.display = "none";
-                //             var statusMessage = document.getElementById('statusMessageField');
-                //             statusMessage.textContent = '';
-                //         }
-                //         else if (existingCyberSecurityCertificateOption && existingCyberSecurityCertificateOption.checked) {
-                //             outputMessageField.textContent = "Here is your CyberSecurity Certificate Coursework.";
-                //             var rightTab = document.querySelector('.right-tab');
-                //             rightTab.style.display = "none";
-                //             var statusMessage = document.getElementById('statusMessageField');
-                //             statusMessage.textContent = '';
-                //         }
-                //         else if(existingNoneOption && existingNoneOption.checked){
-                //             // Handle the case if no checkboxes are selected
-                //             outputMessageField.textContent = "You did not select course";
-                //             var rightTab = document.querySelector('.right-tab');
-                //             rightTab.style.display = "none";
-                //             var statusMessage = document.getElementById('statusMessageField');
-                //             statusMessage.textContent = '';
-                //         }
-                //     }
-                // })
+                        var sendButton1 = document.getElementById('submitButton');
+                        sendButton1.addEventListener('click', function (){
+                            if (fourYearPlanOption && fourYearPlanOption.checked) {
+                                inputMessageField.value = "I'm an incoming freshman with 0 credit hours!";
+                                outputMessageField.textContent = "Welcome to Georgia State University! We are excited to have you join our incoming freshman class.";
+                                rightTabHeading.textContent = "Would you like to pursue a Certification?";
+                                
+                                //alert(fourYearPlanOption.value);
+                                incomingFreshmanOptions.style.display = "none";
+                                existingCreditsOptions.style.display = "none";
+                                fresherSelectYourPlan.style.display = "block";
+                                //alert("inner");
+                                
+                                
+                                var sendButton1 = document.getElementById('submitButton');
+                                sendButton1.addEventListener('click', function (){
+                                    
+                                        var valuePlan =  document.querySelector('input[name=student-optionPlan4Year]:checked').value;
+                                        if(valuePlan === "data-science-certificate"){
+                                            callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
+                                        }
+                                        else if(valuePlan === "cybersecurity-certificate"){
+                                            callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
+                                        }
+                                        else if(valuePlan === "none"){
+                                            callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
+                                        }
+                                    
+                                })   
+        
+                            }
+                            else if (softwareEngineeringCourseworkOption && softwareEngineeringCourseworkOption.checked) {
+                                outputMessageField.textContent = "Build a strong foundation with core courses like Introduction to Computer Science and Object-Oriented Programming 'CSC 1301 & 1302' and Data Structures 'CSC 2720'. Dive into software development principles, Agile methodologies, and version control for comprehensive skills, such as using Github for personal projects. Explore Web Development either at GSU or with CodePath online courses, databases using SQL or courses such as Database Systems 'CSC 4710', learn new languages, and key areas like Operating Systems 'CSC 4320' and Computer Networks 'CSC 4220'. Enhance your expertise in Software Testing 'CSC 3350', Cybersecurity, and emerging technologies, while gaining practical experience through internships and developing essential soft skills by attending conferences and summits.";
+                                var rightTab = document.querySelector('.right-tab');
+                                rightTab.style.display = "none";
+                                var statusMessage = document.getElementById('statusMessageField');
+                                statusMessage.textContent = '';
+                            }
+        
+                            else if (preReqForCourseOption && preReqForCourseOption.checked) {
+                                inputMessageField.value = "I need prerequisites for courses!";
+                                outputMessageField.textContent = "Select and send the course you would like a pre-requisite for on the right tab.";
+                                rightTabHeading.textContent = "Select The Courses";
+                                incomingFreshmanOptions.style.display = "none";
+                                existingCreditsOptions.style.display = "none";
+        
+                                var preReqForCourseOptionsContainer = document.getElementById("pre-req-options-container");
+                                var sendButton = document.getElementById('submitButton');
+                                var rightTab = document.querySelector('.right-tab');
+                                rightTab.appendChild(preReqForCourseOptionsContainer); // Append pre-requisite radio buttons to the right tab
+                                preReqForCourseOptionsContainer.style.display = "block";
+        
+                                sendButton.style.position = 'absolute';
+                                sendButton.style.bottom = '1rem'; // Set desired bottom position
+                                sendButton.style.left = '50%'; // Set left position to the center
+                                sendButton.style.transform = 'translateX(-50%)';
+                                sendButton.style.width = ''; // Reset width to default (if overridden)
+                                sendButton.style.height = '';
+                                var preReqSelected = document.querySelector('input[name="find-prereqs"]:checked');
+        
+                                if (preReqSelected) {
+                                    
+                                    var selectedCourse = preReqSelected.value;
+                                    // Display pre-requisites for the selected course in the output message field
+                                    inputMessageField.value = "I need prerequisites for courses!";
+        
+                                    callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
+                                        
+        
+                                    // Hide the right tab
+                                    var rightTab = document.querySelector('.right-tab');
+                                    rightTab.style.display = "none";
+        
+                                    // Clear any existing status or messages
+                                    var statusMessage = document.getElementById('statusMessageField');
+                                    statusMessage.textContent = '';
+                                }
+                            }
+        
+                            else if (dataScienceCertificateOption && dataScienceCertificateOption.checked) {
+                                outputMessageField.textContent = "Here is your Data Science Certificate Coursework.";
+                                var rightTab = document.querySelector('.right-tab');
+                                rightTab.style.display = "none";
+                                var statusMessage = document.getElementById('statusMessageField');
+                                statusMessage.textContent = '';
+                            }
+                            else if (cyberSecurityCertificateOption && cyberSecurityCertificateOption.checked) {
+                                outputMessageField.textContent = "Here is your CyberSecurity Certificate Coursework.";
+                                var rightTab = document.querySelector('.right-tab');
+                                rightTab.style.display = "none";
+                                var statusMessage = document.getElementById('statusMessageField');
+                                statusMessage.textContent = '';
+                            }
+                            // else{
+                            //     // Handle the case if no course is selected for pre-requisites
+                            //     outputMessageField.textContent = "Please select a course for pre-requisites.";
+                            // }
+                        })
             }
         }
 
