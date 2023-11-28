@@ -319,6 +319,7 @@ document.getElementById("submitButton").addEventListener("click", function() {
                                     inputMessageField.value = "I need prerequisites for courses!";
         
                                     callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE);
+
                                         
         
                                     // Hide the right tab
@@ -362,41 +363,45 @@ document.getElementById("submitButton").addEventListener("click", function() {
 
 function callPythonFunction(completed_courses, find_prerequisites, create_four_year_plan, isDataScience, isCYBER, isSWE) {
     // Make an AJAX request to the Flask server
-    $.ajax({
+     // AJAX call to Flask server
+     $.ajax({
         type: 'POST',
         url: '/process-request',
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify({
-            completed_courses: completed_courses, 
-            find_prerequisites: find_prerequisites, 
-            create_four_year_plan: create_four_year_plan, 
-            isDataScience: isDataScience, 
-            isCYBER: isCYBER, 
-            isSWE: isSWE
+            completed_courses: completedCourses,
+            find_prerequisites: findPrerequisites,
+            create_four_year_plan: createFourYearPlan,
+            isDataScience: isDataScience,
+            isCYBER: isCyberSecurity,
+            isSWE: isSoftwareEngineering
         }),
-        success: function (response) {
-            // Handle the response from the server
-            if (response.fourYearPlan != 'Empty') {
-                console.log(response.fourYearPlan);
-                var formattedText = response.fourYearPlan.replace(/\n/g, '<br>');
-                outputMessageField.innerHTML = formattedText;
-            }
-            else if (response.prerequisite != 'Empty') {
-                console.log(response.prerequisite);
-                var formattedText = response.prerequisite.replace(/\n/g, '<br>');
-                outputMessageField.innerHTML = formattedText;
-            } else {
-                // If it's not a string, handle accordingly
-                console.error('Invalid response format for fourYearPlan:', fourYearPlan);
-                outputMessageField.textContent = 'Error: Invalid response format for fourYearPlan';
-            }
+        success: handleResponse,
+        error: handleError
+    });
+}
 
-        },
-        error: function (error) {
-            console.error(error);
-            outputMessageField.textContent = "Thank you for using the Good Advisor!";
-        }
-});
+function handleResponse(response){
+     // Handle the response from the server
+     if (response.fourYearPlan != 'Empty') {
+        console.log(response.fourYearPlan);
+        var formattedText = response.fourYearPlan.replace(/\n/g, '<br>');
+        outputMessageField.innerHTML = formattedText;
+    }
+    else if (response.prerequisite != 'Empty') {
+        console.log(response.prerequisite);
+        var formattedText = response.prerequisite.replace(/\n/g, '<br>');
+        outputMessageField.innerHTML = formattedText;
+    } else {
+        // If it's not a string, handle accordingly
+        console.error('Invalid response format for fourYearPlan:', fourYearPlan);
+        outputMessageField.textContent = 'Error: Invalid response format for fourYearPlan';
+    }
+
+}
+function handleError(error){
+        console.error(error);
+        outputMessageField.textContent = "Thank you for using the Good Advisor!";
 }
 
 });

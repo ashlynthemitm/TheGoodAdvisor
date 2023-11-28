@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, jsonify
 from ChatOutput import *
 import os
 
-template_dir = os.path.abspath('C:/Users/ashly/OneDrive/Documents/Education Material/SWEClass/ProjectRepo/TheGoodAdvisor/ChatUI/templates')
-static_dir = os.path.abspath('C:/Users/ashly/OneDrive/Documents/Education Material/SWEClass/ProjectRepo/TheGoodAdvisor/ChatUI/static')
+template_dir = os.path.abspath('./ChatUI/templates')
+static_dir = os.path.abspath('./ChatUI/static')
 # Set the path to the templates
 app = Flask(__name__, 
             static_folder=static_dir, 
