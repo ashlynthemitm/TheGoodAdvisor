@@ -369,12 +369,12 @@ function callPythonFunction(completed_courses, find_prerequisites, create_four_y
         url: '/process-request',
         contentType: 'application/json;charset=UTF-8',
         data: JSON.stringify({
-            completed_courses: completedCourses,
-            find_prerequisites: findPrerequisites,
-            create_four_year_plan: createFourYearPlan,
+            completed_courses: completed_courses,
+            find_prerequisites: find_prerequisites,
+            create_four_year_plan: create_four_year_plan,
             isDataScience: isDataScience,
-            isCYBER: isCyberSecurity,
-            isSWE: isSoftwareEngineering
+            isCYBER: isCYBER,
+            isSWE: isSWE
         }),
         success: handleResponse,
         error: handleError
