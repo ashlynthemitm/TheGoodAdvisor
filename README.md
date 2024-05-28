@@ -1,32 +1,13 @@
 # Table of Contents
 - [Description](#description)
-- [Use Case Diagrams](#use-case-diagrams)
-- [System Design Diagrams](#system-design-diagrams)
 - [Functional Requirements](#functional-requirements)
 - [Non-Functional Requirements](#non-functional-requirements)
 - [Sprint 1 Presentation](#sprint-1-presentation)
 - [Sprint 2 Presentation](#sprint-2-presentation)
-- [Wireframes](#wireframes)
 - [Test Cases](#test-cases)
 
 ## Description
 The GoodAdvisor is a selection input-based Chatbot created to assist Computer Science students with choosing the correct coursework to take. Picking schedules is hard for anybody, but for CS students it can be difficult to know the best path to take, to effectively prepare for the next one and internships. This way students can map out their four years of college efficiently and intentionally. Students will be prompted with questions to satisfy their user story and have the chance to check off any course they have already taken. 
-
-## Use Case Diagrams
-
-![UC1](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/84640675/749603d2-03bc-4193-9fe5-df9f00c1c354)
-
-![UC2](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/84640675/d9acf0a6-9191-4135-91d6-98bc8690c334)
-
-![UC3](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/84640675/52a06a19-9842-4def-9c95-2b9f070655a2)
-
-![UC4](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/84640675/29be5af5-ae62-4a59-9302-33f889fb072e)
-
-![UC5](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/84640675/6377baf8-c40f-4c46-9caf-fbdff1d8d3c7)
-
-## System Design Diagrams
-
-![SystemDesigns](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/84640675/fb7427b4-50d8-4b62-a049-55b922926b5a)
 
 ## Functional Requirements
 
@@ -50,11 +31,6 @@ https://docs.google.com/presentation/d/1yGV_tC4jtSiPHOuWyx7I7WPqB9XT_VjyeSi4KRjJ
 
 ## Sprint 2 Presentation
 https://docs.google.com/presentation/d/10QOdjy4xlSK6FF20TBklw_5hjoAbyHpOHBGpCyHEKLQ/edit?usp=sharing
-
-## Wireframes
-![image](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/106557299/3b249b93-e2e3-472c-a21f-3cca1bb1c722)
-![image](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/106557299/89f2308d-8632-448f-8865-5551e6b0cfa4)
-![image](https://github.com/CSC-4350-FL2023/TheGoodAdvisor/assets/106557299/c18228f2-6e86-4ab3-8fcc-8efb773420a9)
 
 ## Test Cases 
 
