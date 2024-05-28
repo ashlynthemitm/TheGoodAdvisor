@@ -1,4 +1,6 @@
-# Table of Contents
+# The Good Advisor
+
+## Table of Contents
 - [Description](#description)
 - [Functional Requirements](#functional-requirements)
 - [Non-Functional Requirements](#non-functional-requirements)
